@@ -18,12 +18,13 @@ private:
     int numPancakes;
     
 public:
-    bool isGoal();
+    // Revisa si una configuracion es el objetivo final - O(n)
+    bool isGoal(vector<int> pancakes);
     
-    // Calcula todos los sucesores de una configuracion de panquecas
+    // Calcula todos los sucesores de una configuracion de panquecas - O(nˆ2) creo
     vector< vector<int> > succ(vector<int> pancakes);
     
-    // Calcula el sucesor de una configuraccion voltando 'flipped' panquecas
+    // Calcula el sucesor de una configuraccion voltando 'flipped' panquecas - O(n)
     vector<int> succ(vector<int> pancakes, int flipped);
     
     int getNumPancakes();
