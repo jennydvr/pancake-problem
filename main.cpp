@@ -71,7 +71,6 @@ int main () {
     myfile.close();
 
 
-    reverse(myvector.begin(),myvector.begin() + (int)myvector.size());
     // print out content:
     cout << "myvector contains:";
     for (it=myvector.begin(); it!=myvector.end(); ++it)
