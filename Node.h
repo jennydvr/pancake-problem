@@ -28,6 +28,9 @@ public:
     // Constructor
     Node(vector<int> pancakes, int g);
     
+    // Destructor
+    ~Node();
+    
     // Chequea si este nodo es goal
     bool isGoal();
     

@@ -13,6 +13,14 @@ Node::Node(vector<int> state, int g) {
     this->g = g;
 }
 
+Node::~Node() {
+    g = 0;
+    state.clear();
+    
+    // Clear no borra la memoria en realidad! Esto, si
+    vector<int>().swap(state);
+}
+
 bool Node::isGoal() {
     for (int i = 0; i != state.size(); ++i)
         if (state[i] != i + 1)
