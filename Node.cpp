@@ -58,3 +58,14 @@ int Node::getG() {
 vector<int> Node::getState() {
     return state;
 }
+
+int Node::getHeuristic(){
+	int gaps = 0;
+	for (int i = 1; i < state.size(); i++){
+		if (abs(state[i] - state[i+1]) > 1){
+			gaps++;
+		}
+	}
+	return gaps;
+}
+

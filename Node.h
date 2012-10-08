@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <vector>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -22,6 +23,7 @@ private:
     
     // Costo de llegar a esta configuracion desde la inicial
     int g;
+
     
 public:
     
@@ -45,6 +47,10 @@ public:
     
     // Getter de la configuracion de las panquecas
     vector<int> getState();
+    
+    // Obtains heuristic value from the state
+    int getHeuristic();
+    
     
 };
 
