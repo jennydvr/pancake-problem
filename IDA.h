@@ -32,7 +32,9 @@ using namespace std;
 	// IDA* algorithm
 	Solution ida(Node n, int cost);
 	
-	// Bounded DFS
+	/* Bounded DFS: using DFS searchs for the optimal path
+	 * from root to node n considering heuristic function
+	*/
 	Solution boundedDFS(Node n, int t);
 	
 
