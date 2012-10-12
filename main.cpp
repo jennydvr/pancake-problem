@@ -8,7 +8,8 @@
 
 #include <iostream>
 #include <fstream>
-#include "Node.h"
+//#include "Node.h"
+#include "IDA.h"
 
 using namespace std;
 
@@ -96,6 +97,15 @@ int main(int argc, const char * argv[])
     vector<int> state;
     for (int i = 1; i != 6; ++i)
         state.push_back(i);
+
+    Node n(state, 0);
+    Solution s = ida(n);
+
+    cout << s.solved << endl;
+
+   /* vector<int> state;
+    for (int i = 1; i != 6; ++i)
+        state.push_back(i);
     
     Node node(state, 0);
     Node copy(state, 1);
@@ -113,7 +123,7 @@ int main(int argc, const char * argv[])
     
     //... execute algorithm
     
-    double tEnd = (double)(clock() - tStart)/CLOCKS_PER_SEC;
+    double tEnd = (double)(clock() - tStart)/CLOCKS_PER_SEC;*/
     
     return 0;
 }

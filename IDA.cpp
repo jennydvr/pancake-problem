@@ -8,7 +8,11 @@
 
 #include "IDA.h"
 
-
+    // Stack where the already visited nodes reside
+    vector<Node> closed;
+    
+    // Termination bound
+    int bound = 10;
 
 Solution boundedDFS(Node n, int t){
     Solution solution;
@@ -57,8 +61,8 @@ Solution ida(Node n) {
     Solution solution;
     solution.cost = n.getHeuristic();
     
-   // while (!solution.solved && solution.cost < bound) {
-    while(!solution.solved){
+    while (!solution.solved && solution.cost < bound) {
+    //while(!solution.solved){
       //  stack = vector<Node>(1, n);
         solution = boundedDFS(n, solution.cost);
     }

@@ -14,10 +14,10 @@
 using namespace std;
     
     // Stack where the already visited nodes reside
-    vector<Node> closed;
+    //vector<Node> closed;
     
     // Termination bound
-    int bound;
+    //int bound;
     
     // IDA* algorithm
     struct Solution {
