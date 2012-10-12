@@ -8,7 +8,6 @@
 
 #include "Node.h"
 
-
 Node::Node(vector<int> state, int g) {
     this->state = state;
     this->g = g;
@@ -37,9 +36,8 @@ bool Node::isGoal() {
 }
 
 Node Node::getSuccesor(int flipped) {
-    // Copio 'state' para no dañarlo
-    vector<int> copy;
-    reverse_copy(state.begin(), state.begin() + flipped, copy.begin());
+    vector<int> copy(state);
+    reverse(copy.begin(), copy.begin() + flipped);
     
     return Node(copy, g + 1);
 }
@@ -69,21 +67,19 @@ int Node::getHeuristic() {
 	for (int i = 1; i != state.size(); ++i)
 		if (abs(state[i] - state[i+1]) > 1)
 			++gaps;
-            
+    
 	return gaps;
 }
 
 string Node::toString() {
-    string res("state = [");
-    for (int i = 0; i != state.size(); ++i) {
-        res += " ";
-        res += state[i];
-    }
-    res += "]\ng = ";
-    res += g;
-    res += "    h = ";
-    res += getHeuristic();
-    res += "\n";
+    stringstream ss;
     
-    return res;
+    ss << "state = [";
+    for (int i = 0; i != state.size(); ++i)
+        ss << " " << state[i];
+    ss << " ]\ng = " << g << endl;
+    ss << "goal = " << isGoal() << endl;
+    //<< "    h = " << getHeuristic() << "\n";
+    
+    return ss.str();
 }
