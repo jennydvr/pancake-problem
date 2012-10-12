@@ -22,15 +22,15 @@ Node::~Node() {
 }
 
 bool Node::operator==(const Node &other) const {
-    for (int i = 0; i != state.size(); ++i)
+    for (unsigned int i = 0; i != state.size(); ++i)
         if (other.state[i] != state[i])
             return false;
     return true;
 }
 
 bool Node::isGoal() {
-    for (int i = 0; i != state.size(); ++i)
-        if (state[i] != i + 1)
+    for (unsigned int i = 0; i != state.size(); ++i)
+        if (state[i] != (int)i )
             return false;
     return true;
 }
@@ -44,7 +44,7 @@ Node Node::getSuccesor(int flipped) {
 
 vector<Node> Node::getAllSuccesors() {
     vector<Node> solution;
-    for (int i = 2; i != state.size() + 1; ++i)
+    for (unsigned int i = 2; i != state.size() + 1; ++i)
         solution.push_back(getSuccesor(i));
     
     return solution;
@@ -64,7 +64,7 @@ int Node::getNumPancakes() {
 
 int Node::getHeuristic() {
 	int gaps = 0;
-	for (int i = 1; i != state.size(); ++i)
+	for (unsigned int i = 0; i != state.size()-1; ++i)
 		if (abs(state[i] - state[i+1]) > 1)
 			++gaps;
     
@@ -75,7 +75,7 @@ string Node::toString() {
     stringstream ss;
     
     ss << "state = [";
-    for (int i = 0; i != state.size(); ++i)
+    for (unsigned int i = 0; i != state.size(); ++i)
         ss << " " << state[i];
     ss << " ]\ng = " << g << endl;
     ss << "goal = " << isGoal() << endl;
