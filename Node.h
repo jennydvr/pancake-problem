@@ -12,18 +12,18 @@
 #include <iostream>
 #include <vector>
 #include <stdlib.h>
+#include <string>
 
 using namespace std;
 
 class Node {
 private:
     
-    // Configuracion de las panquecas
+    // Pancakes configuration
     vector<int> state;
     
-    // Costo de llegar a esta configuracion desde la inicial
+    // Cost from the root to this node
     int g;
-
     
 public:
     
@@ -33,24 +33,32 @@ public:
     // Destructor
     ~Node();
     
-    // Chequea si este nodo es goal
+    // Equals-operator
+    bool operator==(const Node &other) const;
+    
+    // Checks whether this node is goal or not
     bool isGoal();
     
-    // Obtiene el sucesor de esta configuracion a voltear 'flipped' panquecas
+    // Gets a succesor by flipping 'flipped' pancakes
     Node getSuccesor(int flipped);
     
-    // Obtiene todos los sucesores de esta configuracion
+    // Gets all the succesors
     vector<Node> getAllSuccesors();
     
-    // Getter del costo de la raiz al nodo
+    // Gets the node cost
     int getG();
     
-    // Getter de la configuracion de las panquecas
+    // Gets the state
     vector<int> getState();
+    
+    // Gets the size of the instance
+    int getNumPancakes();
     
     // Obtains heuristic value from the state
     int getHeuristic();
     
+    // Converts this node into a string
+    string toString();
     
 };
 

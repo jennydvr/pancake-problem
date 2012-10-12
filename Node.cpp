@@ -21,6 +21,13 @@ Node::~Node() {
     vector<int>().swap(state);
 }
 
+bool Node::operator==(const Node &other) const {
+    for (int i = 0; i != state.size(); ++i)
+        if (other.state[i] != state[i])
+            return false;
+    return true;
+}
+
 bool Node::isGoal() {
     for (int i = 0; i != state.size(); ++i)
         if (state[i] != i + 1)
@@ -33,20 +40,13 @@ Node Node::getSuccesor(int flipped) {
     vector<int> copy;
     reverse_copy(state.begin(), state.begin() + flipped, copy);
     
-    // El nuevo costo sera el del nodo anterior + las panquecas volteadas
-    return Node(copy, g + flipped);
+    return Node(copy, g + 1);
 }
 
 vector<Node> Node::getAllSuccesors() {
     vector<Node> solution;
-    for (int i = 2; i != state.size() + 1; ++i) {
-        // Copio 'state' para no dañarlo
-        vector<int> copy;
-        reverse_copy(state.begin(), state.begin() + i, copy.begin());
-        
-        // Creo el nodo y lo pongo en la lista
-        solution.push_back(Node(copy, g + i));
-    }
+    for (int i = 2; i != state.size() + 1; ++i)
+        solution.push_back(getSuccesor(i));
     
     return solution;
 }
@@ -59,13 +59,30 @@ vector<int> Node::getState() {
     return state;
 }
 
-int Node::getHeuristic(){
+int Node::getNumPancakes() {
+    return (int) state.size();
+}
+
+int Node::getHeuristic() {
 	int gaps = 0;
-	for (int i = 1; i < state.size(); i++){
-		if (abs(state[i] - state[i+1]) > 1){
-			gaps++;
-		}
-	}
+	for (int i = 1; i != state.size(); ++i)
+		if (abs(state[i] - state[i+1]) > 1)
+			++gaps;
+            
 	return gaps;
 }
 
+string Node::toString() {
+    string res("state = [");
+    for (int i = 0; i != state.size(); ++i) {
+        res += " ";
+        res += state[i];
+    }
+    res += "]\ng = ";
+    res += g;
+    res += "    h = ";
+    res += getHeuristic();
+    res += "\n";
+    
+    return res;
+}

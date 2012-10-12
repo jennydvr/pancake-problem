@@ -10,27 +10,24 @@
 #define __pancake_problem__IDA__
 
 #include "Node.h"
-#include <stack>
 
 using namespace std;
 	
 	// Stack where the already visited nodes reside
-	stack<Node> closed;
+	vector<Node> closed;
 	
 	// Termination bound
 	int bound;
 	
 	//Struct of the solution
 	struct Solution {
-		stack<Node> plan;
+		vector<int> plan;
 		int cost;
+        bool solved = false;
 	};
-	
-	// Returns the path from root to node n
-	stack<Node> extractSolution(Node n);
 
 	// IDA* algorithm
-	Solution ida(Node n, int cost);
+	Solution ida(Node n);
 	
 	/* Bounded DFS: using DFS searchs for the optimal path
 	 * from root to node n considering heuristic function

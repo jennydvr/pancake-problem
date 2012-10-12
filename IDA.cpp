@@ -5,52 +5,60 @@
 //  Created by Grace Gimon on 06/10/12.
 //  Copyright (c) 2012 Grace Gimon. All rights reserved.
 //
+
 #include "IDA.h"
 
 Solution boundedDFS(Node n, int t){
-	int newF = n.getG() + n.getHeuristic();
 	Solution solution;
-	if (newF > t){
-		solution.cost = t;
+    
+    // Checks if the bound hasn't been reached
+    int sum = n.getG() + n.getHeuristic();
+	if (sum > t) {
+		solution.cost = sum;
 		return solution;
 	}
-	if (n.isGoal()){
-		solution.plan = extractSolution(n);
+    
+    // Check if there is a solution
+	if (n.isGoal()) {
 		solution.cost = n.getG();
+        solution.solved = true;
 		return solution;
 	}
 	
 	int newT = bound;
 	
-	vector<Node> succesors = n.getAllSuccesors();
-	for (int i = 0; i< succesors.size(); i++){
-		Solution aux;
-	/* In case of using non-duplicate nodes
-	 * check here
-	 */
-		Node suc = succesors[i];
-		aux = boundedDFS(suc,t);
-		closed.push(suc);
-		if (!aux.plan.empty())
+	for (int i = 0; i != n.getNumPancakes(); ++i) {
+		Node suc = n.getSuccesor(i);
+        
+        // If this succesor already exists, continue
+     /*   if (find(closed.begin(), closed.end(), suc) != closed.end())
+            continue;
+        
+        closed.push_back(suc);*/
+        
+		Solution aux = boundedDFS(suc, t);
+        
+		if (aux.solved) {
+            aux.plan.push_back(i);
 			return aux;
+        }
+        
 		newT = min(newT, aux.cost);
 	}
 
+    // There is no succesor that reachs the goal
+    solution.cost = newT;
 	return solution;
 }
 
-Solution ida(Node n, int cost){
-	cost = n.getHeuristic();
+Solution ida(Node n) {
 	Solution solution;
-	solution.cost = cost;
-	while (solution.plan.empty() && cost < bound){
-		solution = boundedDFS(n,cost);
-		cost = solution.cost;
-	}
+	solution.cost = n.getHeuristic();
+    
+	while (!solution.solved && solution.cost < bound) {
+      //  stack = vector<Node>(1, n);
+		solution = boundedDFS(n, solution.cost);
+    }
+    
 	return solution;
 }
-
-stack<Node> extractSolution (Node n){
-	
-}
-
