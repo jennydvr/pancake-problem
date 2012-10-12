@@ -123,7 +123,7 @@ int main(int argc, const char * argv[])
     
     //... execute algorithm
     
-    double tEnd = (double)(clock() - tStart)/CLOCKS_PER_SEC;*/
+    double tEnd = (double)(clock() - tStart)/CLOCKS_PER_SEC;
     
     return 0;
 }
