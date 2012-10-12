@@ -8,7 +8,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <sstream>
 #include "Node.h"
 
 using namespace std;
@@ -108,6 +107,13 @@ int main(int argc, const char * argv[])
         cout << succ[i].toString();
 
     cout << "equal = " << (node == succ[1]);
+    
+    // Time measure:
+    clock_t tStart = clock();
+    
+    //... execute algorithm
+    
+    double tEnd = (double)(clock() - tStart)/CLOCKS_PER_SEC;
     
     return 0;
 }
