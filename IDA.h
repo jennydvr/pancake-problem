@@ -20,11 +20,7 @@ using namespace std;
 	int bound;
 	
 	//Struct of the solution
-	struct Solution {
-		vector<int> plan;
-		int cost;
-        bool solved = false;
-	};
+	struct Solution;
 
 	// IDA* algorithm
 	Solution ida(Node n);

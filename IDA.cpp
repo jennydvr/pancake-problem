@@ -8,6 +8,16 @@
 
 #include "IDA.h"
 
+struct Solution {
+		vector<int> plan;
+		int cost;
+        bool solved;
+        Solution(){
+        	solved = false;
+        }        	
+};
+
+
 Solution boundedDFS(Node n, int t){
 	Solution solution;
     
