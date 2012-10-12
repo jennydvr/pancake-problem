@@ -93,17 +93,17 @@ int main(int argc, const char * argv[])
     cout << endl;
     //vectores(); */
     
-    
-    vector<int> state;
+    //Prueba de lo de Grace
+    /*vector<int> state;
     for (int i = 1; i != 6; ++i)
         state.push_back(i);
 
     Node n(state, 0);
     Solution s = ida(n);
 
-    cout << s.solved << endl;
+    cout << s.solved << endl;*/
 
-   /* vector<int> state;
+    vector<int> state;
     for (int i = 1; i != 6; ++i)
         state.push_back(i);
     
