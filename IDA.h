@@ -12,23 +12,23 @@
 #include "Node.h"
 
 using namespace std;
-	
-	// Stack where the already visited nodes reside
-	vector<Node> closed;
-	
-	// Termination bound
-	int bound;
-	
-	//Struct of the solution
-	struct Solution;
+    
+    // Stack where the already visited nodes reside
+    vector<Node> closed;
+    
+    // Termination bound
+    int bound;
+    
+    //Struct of the solution
+    struct Solution;
 
-	// IDA* algorithm
-	Solution ida(Node n);
-	
-	/* Bounded DFS: using DFS searchs for the optimal path
-	 * from root to node n considering heuristic function
-	*/
-	Solution boundedDFS(Node n, int t);
-	
+    // IDA* algorithm
+    Solution ida(Node n);
+    
+    /* Bounded DFS: using DFS searchs for the optimal path
+     * from root to node n considering heuristic function
+    */
+    Solution boundedDFS(Node n, int t);
+    
 
 #endif /* defined(__pancake_problem__IDA__) */

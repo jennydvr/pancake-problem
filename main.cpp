@@ -9,10 +9,6 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <string>
-#include <vector>
-#include <algorithm>
-
 #include "Node.h"
 
 using namespace std;
@@ -65,6 +61,7 @@ int vectores () {
 
 int main(int argc, const char * argv[])
 {
+    /*
     vector<int> myvector;
     vector<int>::iterator it;
     string line;
@@ -94,7 +91,23 @@ int main(int argc, const char * argv[])
         cout << " " << *it;
         
     cout << endl;
-    //vectores(); 
+    //vectores(); */
+    
+    
+    vector<int> state;
+    for (int i = 1; i != 6; ++i)
+        state.push_back(i);
+    
+    Node node(state, 0);
+    Node copy(state, 1);
+    
+    cout << node.toString() << endl;
+    
+    vector<Node> succ = node.getAllSuccesors();
+    for (int i = 0; i != succ.size(); ++i)
+        cout << succ[i].toString();
 
+    cout << "equal = " << (node == succ[1]);
+    
     return 0;
 }

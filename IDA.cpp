@@ -9,36 +9,35 @@
 #include "IDA.h"
 
 struct Solution {
-		vector<int> plan;
-		int cost;
-        bool solved;
-        Solution(){
-        	solved = false;
-        }        	
+    vector<int> plan;
+    int cost;
+    bool solved;
+    Solution() {
+        solved = false;
+    }
 };
 
-
 Solution boundedDFS(Node n, int t){
-	Solution solution;
+    Solution solution;
     
     // Checks if the bound hasn't been reached
     int sum = n.getG() + n.getHeuristic();
-	if (sum > t) {
-		solution.cost = sum;
-		return solution;
-	}
+    if (sum > t) {
+        solution.cost = sum;
+        return solution;
+    }
     
     // Check if there is a solution
-	if (n.isGoal()) {
-		solution.cost = n.getG();
+    if (n.isGoal()) {
+        solution.cost = n.getG();
         solution.solved = true;
-		return solution;
-	}
-	
-	int newT = bound;
-	
-	for (int i = 0; i != n.getNumPancakes(); ++i) {
-		Node suc = n.getSuccesor(i);
+        return solution;
+    }
+    
+    int newT = bound;
+    
+    for (int i = 0; i != n.getNumPancakes() + 1; ++i) {
+        Node suc = n.getSuccesor(i);
         
         // If this succesor already exists, continue
      /*   if (find(closed.begin(), closed.end(), suc) != closed.end())
@@ -46,29 +45,29 @@ Solution boundedDFS(Node n, int t){
         
         closed.push_back(suc);*/
         
-		Solution aux = boundedDFS(suc, t);
+        Solution aux = boundedDFS(suc, t);
         
-		if (aux.solved) {
+        if (aux.solved) {
             aux.plan.push_back(i);
-			return aux;
+            return aux;
         }
         
-		newT = min(newT, aux.cost);
-	}
+        newT = min(newT, aux.cost);
+    }
 
     // There is no succesor that reachs the goal
     solution.cost = newT;
-	return solution;
+    return solution;
 }
 
 Solution ida(Node n) {
-	Solution solution;
-	solution.cost = n.getHeuristic();
+    Solution solution;
+    solution.cost = n.getHeuristic();
     
-	while (!solution.solved && solution.cost < bound) {
+    while (!solution.solved && solution.cost < bound) {
       //  stack = vector<Node>(1, n);
-		solution = boundedDFS(n, solution.cost);
+        solution = boundedDFS(n, solution.cost);
     }
     
-	return solution;
+    return solution;
 }
