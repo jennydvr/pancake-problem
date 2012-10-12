@@ -8,6 +8,7 @@
 
 #include "Node.h"
 
+
 Node::Node(vector<int> state, int g) {
     this->state = state;
     this->g = g;
@@ -38,7 +39,7 @@ bool Node::isGoal() {
 Node Node::getSuccesor(int flipped) {
     // Copio 'state' para no dañarlo
     vector<int> copy;
-    reverse_copy(state.begin(), state.begin() + flipped, copy);
+    reverse_copy(state.begin(), state.begin() + flipped, copy.begin());
     
     return Node(copy, g + 1);
 }

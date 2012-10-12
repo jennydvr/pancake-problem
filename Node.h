@@ -13,6 +13,7 @@
 #include <vector>
 #include <stdlib.h>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
