@@ -93,35 +93,27 @@ int main(int argc, const char * argv[])
     cout << endl;
     //vectores(); */
     
-    //Prueba de lo de Grace
-    /*vector<int> state;
-    for (int i = 1; i != 6; ++i)
-        state.push_back(i);
-
-    Node n(state, 0);
-    Solution s = ida(n);
-
-    cout << s.solved << endl;*/
-
+    
     vector<int> state;
-    for (int i = 1; i != 6; ++i)
+    for (int i = 0; i != 6; ++i)
         state.push_back(i);
+    random_shuffle(state.begin(), state.end());
     
-    Node node(state, 0);
-    Node copy(state, 1);
-    
-    cout << node.toString() << endl;
-    
-    vector<Node> succ = node.getAllSuccesors();
-    for (int i = 0; i != succ.size(); ++i)
-        cout << succ[i].toString();
-
-    cout << "equal = " << (node == succ[1]);
+    Node n(state, 0);
+    cout << n.toString() << endl;
     
     // Time measure:
     clock_t tStart = clock();
     
-    //... execute algorithm
+    Solution s = ida(n);
+    cout << "fin = " << s.solved << endl;
+    
+    cout << "plan = ";
+    for (int i = 0; i != s.plan.size(); ++i)
+        cout << s.plan[i] << " ";
+    cout << endl;
+    
+    cout << "solucion ok = " << Node::isSolution(n, s.plan) << endl;
     
     double tEnd = (double)(clock() - tStart)/CLOCKS_PER_SEC;
     

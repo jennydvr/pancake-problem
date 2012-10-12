@@ -28,12 +28,13 @@ Solution boundedDFS(Node n, int t){
     if (n.isGoal()) {
         solution.cost = n.getG();
         solution.solved = true;
+        cout << "Solved: " << solution.cost << endl;
         return solution;
     }
     
     int newT = bound;
     
-    for (int i = 0; i != n.getNumPancakes() + 1; ++i) {
+    for (int i = 2; i != n.getNumPancakes() + 1; ++i) {
         Node suc = n.getSuccesor(i);
         
         // If this succesor already exists, continue
