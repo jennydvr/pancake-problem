@@ -9,6 +9,7 @@
 #include <iostream>
 #include <fstream>
 #include "Node.h"
+#include "IDA.h"
 
 using namespace std;
 

@@ -8,7 +8,8 @@
 
 #include "IDA.h"
 
-
+int bound;
+vector<Node> closed;
 
 Solution boundedDFS(Node n, int t){
     Solution solution;
