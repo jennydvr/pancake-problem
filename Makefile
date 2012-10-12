@@ -1,4 +1,5 @@
-all: clean pancakes
+all: clean pancakes generador
+
 pancakes: main.out
 
 main.out: main.o Node.o IDA.o
@@ -13,6 +14,12 @@ Node.o: Node.h Node.cpp
 IDA.o:  Node.h IDA.h IDA.cpp
 	g++ -c -O6 Node.h IDA.h IDA.cpp
 
+
+generador: generador.o
+	g++ -o Generador.out generador.o
+
+generador.o: generador.cpp
+	g++ -c -O6 generador.cpp
 
 clean:
 	rm -f *.o; rm -f pancake.out
