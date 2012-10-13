@@ -29,6 +29,9 @@ private:
     
 public:
     
+    
+    static bool isSolution(Node root, vector<int> solution);
+    
     // Constructor
     Node(vector<int> pancakes, int g);
     

@@ -62,11 +62,21 @@ int Node::getNumPancakes() {
     return (int) state.size();
 }
 
+bool Node::isSolution(Node root, vector<int> solution) {
+    for (int i = (int)solution.size() - 1; i != -1; --i)
+        root = root.getSuccesor(solution[i]);
+        
+    return root.isGoal();
+}
+
 int Node::getHeuristic() {
 	int gaps = 0;
-	for (unsigned int i = 0; i != state.size()-1; ++i)
+	for (unsigned int i = 0; i != state.size() - 1; ++i)
 		if (abs(state[i] - state[i+1]) > 1)
 			++gaps;
+    
+    if (state[state.size()] != state.size() - 1)
+        ++gaps;
     
 	return gaps;
 }
@@ -77,9 +87,9 @@ string Node::toString() {
     ss << "state = [";
     for (unsigned int i = 0; i != state.size(); ++i)
         ss << " " << state[i];
-    ss << " ]\ng = " << g << endl;
+    ss << " ]\ng = " << g;
+    ss << "    h = " << getHeuristic() << "\n";
     ss << "goal = " << isGoal() << endl;
-    //<< "    h = " << getHeuristic() << "\n";
     
     return ss.str();
 }
