@@ -22,4 +22,4 @@ generador.o: generador.cpp
 	g++ -c -O6 generador.cpp
 
 clean:
-	rm -f *.o; rm -f pancake.out
+	rm -f *.o; rm -f *.gch; rm -f pancake.out
