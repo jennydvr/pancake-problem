@@ -114,7 +114,7 @@ int main(int argc, const char * argv[])
     cout << s.solved << endl;*/
 
     vector<int> state;
-    for (int i = 0; i != 30; ++i)
+    for (int i = 0; i != 60; ++i)
         state.push_back(i);
     srand ( unsigned ( time (NULL) ) );
     random_shuffle(state.begin(), state.end(), p_myrandom);
@@ -132,10 +132,13 @@ int main(int argc, const char * argv[])
     
     // Time measure:
     clock_t tStart = clock();
-    
-    Solution s = ida(node);
-    cout << "fin = " << s.solved << endl;   
 
+    Solution s = ida(node);
+
+    double tEnd = (double)(clock() - tStart)/CLOCKS_PER_SEC;    
+    ////////////////
+
+    cout << "fin = " << s.solved << endl;
     
     cout << "solucion ok = " << Node::isSolution(node, s.plan) << endl;
     
@@ -145,7 +148,7 @@ int main(int argc, const char * argv[])
         cout << s.plan[i] << " ";
     cout << endl;
 
-    double tEnd = (double)(clock() - tStart)/CLOCKS_PER_SEC;
+
 
     cout << "Tiempo: " << tEnd << endl;
     
