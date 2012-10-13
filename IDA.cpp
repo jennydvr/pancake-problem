@@ -12,7 +12,7 @@
     vector<Node> closed;
     
     // Termination bound
-    int bound = 10;
+    int bound = 1000000000;
 
 Solution boundedDFS(Node n, int t){
     Solution solution;

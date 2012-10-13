@@ -114,7 +114,7 @@ int main(int argc, const char * argv[])
     cout << s.solved << endl;*/
 
     vector<int> state;
-    for (int i = 0; i != 7; ++i)
+    for (int i = 0; i != 30; ++i)
         state.push_back(i);
     srand ( unsigned ( time (NULL) ) );
     random_shuffle(state.begin(), state.end(), p_myrandom);
@@ -146,6 +146,8 @@ int main(int argc, const char * argv[])
     cout << endl;
 
     double tEnd = (double)(clock() - tStart)/CLOCKS_PER_SEC;
+
+    cout << "Tiempo: " << tEnd << endl;
     
     return 0;
 }
