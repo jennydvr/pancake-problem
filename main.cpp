@@ -8,10 +8,20 @@
 
 #include <iostream>
 #include <fstream>
+#include <functional>
+#include <ctime>
+#include <cstdlib>
 //#include "Node.h"
 #include "IDA.h"
 
 using namespace std;
+
+// random generator function:
+ptrdiff_t myrandom (ptrdiff_t i) { return rand() % i;}
+
+// pointer object to it:
+ptrdiff_t (*p_myrandom)(ptrdiff_t) = myrandom;
+
 
 template <class T>
 bool from_string(T& t,
@@ -104,33 +114,37 @@ int main(int argc, const char * argv[])
     cout << s.solved << endl;*/
 
     vector<int> state;
-    for (int i = 1; i != 6; ++i)
+    for (int i = 0; i != 7; ++i)
         state.push_back(i);
-    
+    srand ( unsigned ( time (NULL) ) );
+    random_shuffle(state.begin(), state.end(), p_myrandom);
+
     Node node(state, 0);
     Node copy(state, 1);
     
     cout << node.toString() << endl;
     
-    vector<Node> succ = node.getAllSuccesors();
+    /*vector<Node> succ = node.getAllSuccesors();
     for (int i = 0; i != succ.size(); ++i)
         cout << succ[i].toString();
 
-    cout << "equal = " << (node == succ[1]);
+    cout << "equal = " << (node == succ[1]);*/
     
     // Time measure:
     clock_t tStart = clock();
     
-    Solution s = ida(n);
-    cout << "fin = " << s.solved << endl;
+    Solution s = ida(node);
+    cout << "fin = " << s.solved << endl;   
+
     
+    cout << "solucion ok = " << Node::isSolution(node, s.plan) << endl;
+    
+    reverse(s.plan.begin(), s.plan.end());
     cout << "plan = ";
     for (int i = 0; i != s.plan.size(); ++i)
         cout << s.plan[i] << " ";
     cout << endl;
-    
-    cout << "solucion ok = " << Node::isSolution(n, s.plan) << endl;
-    
+
     double tEnd = (double)(clock() - tStart)/CLOCKS_PER_SEC;
     
     return 0;
