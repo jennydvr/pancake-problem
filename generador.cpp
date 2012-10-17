@@ -17,6 +17,46 @@ ptrdiff_t myrandom (ptrdiff_t i) { return rand() % i;}
 ptrdiff_t (*p_myrandom)(ptrdiff_t) = myrandom;
 
 
+void flipIt(vector<int> original, unsigned int steps, char* fileName)
+{
+    ofstream myfile;
+
+    vector<int>::iterator it;
+    int flips = 0;
+    int lastFlip = 0;
+    int n = original.size();
+    int randomNum = 0;
+
+    if (n < 2)
+        return;
+
+    for (unsigned int i = 0; i < steps; i++)
+    {
+        while (lastFlip == flips || flips < 2)
+        {     
+            randomNum = (rand() % n) + 1;            
+            flips = (randomNum);
+            //cout << endl << "random: " << randomNum;
+        }
+
+        lastFlip = flips;
+
+        reverse(original.begin(), original.begin() + flips);
+
+        /*cout << endl << "Iteracion #" << (i + 1) << ": ";
+        for (it=original.begin(); it!=original.end(); ++it)
+        cout << " " << *it;
+        cout << endl;*/
+    }
+
+    myfile.open(fileName);
+    for (int i = 0; i < n; i++)
+        myfile << original[i] << "\n";
+    myfile.close();
+
+    return;
+}
+
 
 template <class T>
 bool from_string(T& t, 
@@ -68,12 +108,26 @@ int vectores () {
 
 int main () {
 
-  int numberOfPancakes = -1;
+  int numberOfPancakes = 0;
+  int numberOfSteps = 0;
+  int numberOfFiles = 0;
 
   while (numberOfPancakes < 1)
   {
   	cout << "Enter number of pancakes: "; 
   	cin >> numberOfPancakes; 
+  }
+
+  while (numberOfSteps < 1)
+  {
+  	cout << "Enter number of steps: "; 
+  	cin >> numberOfSteps; 
+  }
+
+  while (numberOfFiles < 1)
+  {
+  	cout << "Enter number of files: "; 
+  	cin >> numberOfFiles; 
   }
 
   srand ( unsigned ( time (NULL) ) );
@@ -84,55 +138,69 @@ int main () {
   for (int i = 0; i < numberOfPancakes; i++)
 	myvector.push_back(i);
 
-  random_shuffle(myvector.begin(), myvector.end(), p_myrandom); 
+
+  for (int i = 0; i < numberOfFiles; i++)
+  {
+    stringstream ss;
+    ss << "prueba" << i + 1<< ".txt";
+    string sss = ss.str();
+    flipIt(myvector, numberOfSteps, (char*)sss.c_str());
+  }
+
+        /*cout << endl << "vector: ";
+        for (it=myvector.begin(); it!=myvector.end(); ++it)
+        cout << " " << *it;
+        cout << endl;*/
+
+  /*random_shuffle(myvector.begin(), myvector.end(), p_myrandom); 
 
   ofstream myfile;
   myfile.open ("test.txt");
   for (int i = 0; i < numberOfPancakes; i++)
 	myfile << myvector[i] << "\n";
 
-  myfile.close();
+  myfile.close();*/
 
 
-/*  string line;
-  int number;
-  ifstream myfile ("test.txt");
-  if (myfile.is_open())
-  {
-    while ( myfile.good() )
-    {
-      getline (myfile,line);
-      cout << line << endl;
-      number = readInt(line);
-      if (number != -1)
-      	myvector.push_back(number);
-    }
-    myfile.close();
+        /*  string line;
+          int number;
+          ifstream myfile ("test.txt");
+          if (myfile.is_open())
+          {
+            while ( myfile.good() )
+            {
+              getline (myfile,line);
+              cout << line << endl;
+              number = readInt(line);
+              if (number != -1)
+              	myvector.push_back(number);
+            }
+            myfile.close();
 
 
-    reverse(myvector.begin(),myvector.begin() + (int)myvector.size());
-    random_shuffle(myvector.begin(), myvector.end(), p_myrandom); 
+            reverse(myvector.begin(),myvector.begin() + (int)myvector.size());
+            random_shuffle(myvector.begin(), myvector.end(), p_myrandom); 
 
-    // print out content:
-    cout << "myvector contains:";
-    for (it=myvector.begin(); it!=myvector.end(); ++it)
-    cout << " " << *it;
+            // print out content:
+            cout << "myvector contains:";
+            for (it=myvector.begin(); it!=myvector.end(); ++it)
+            cout << " " << *it;
 
-    cout << endl;l
-    //vectores();
-  }
-  else cout << "Unable to open file"; 
-*/
+            cout << endl;l
+            //vectores();
+          }
+          else cout << "Unable to open file"; 
+        */
 
     //reverse(myvector.begin(),myvector.begin() + (int)myvector.size());
     //random_shuffle(myvector.begin(), myvector.end(), p_myrandom); 
 
     // print out content:
-    cout << "myvector contains:";
+    /*cout << "myvector contains:";
     for (it=myvector.begin(); it!=myvector.end(); ++it)
     cout << " " << *it;
 
-    cout << endl;
+    cout << endl;*/
 
   return 0;
 }
