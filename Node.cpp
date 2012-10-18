@@ -11,14 +11,15 @@
 Node::Node(vector<int> state, int g) {
     this->state = state;
     this->g = g;
+    this->h = getHeuristic();
 }
 
 Node::~Node() {
     g = 0;
     state.clear();
-    
-    // Clear no borra la memoria en realidad! Esto, si
+
     vector<int>().swap(state);
+    h = 0;
 }
 
 bool Node::operator==(const Node &other) const {
@@ -26,6 +27,34 @@ bool Node::operator==(const Node &other) const {
         if (other.state[i] != state[i])
             return false;
     return true;
+}
+
+bool Node::operator<(const Node &other) const {
+	if ((h + g) < (other.h +other.g)){
+		return true;
+	}
+	return false;
+}
+
+bool Node::operator>(const Node &other) const{
+	if ((h+ g) > (other.h +other.g)){
+			return true;
+	}
+	return false;
+}
+
+bool Node::operator<=(const Node &other) const {
+	if ((h + g) <= (other.h +other.g)){
+		return true;
+	}
+	return false;
+}
+
+bool Node::operator>=(const Node &other) const{
+	if ((h+ g) >= (other.h +other.g)){
+			return true;
+	}
+	return false;
 }
 
 bool Node::isGoal() {
@@ -58,6 +87,10 @@ vector<int> Node::getState() {
     return state;
 }
 
+int Node::getH(){
+	return h;
+}
+
 int Node::getNumPancakes() {
     return (int) state.size();
 }
@@ -71,14 +104,21 @@ bool Node::isSolution(Node root, vector<int> solution) {
 
 int Node::getHeuristic() {
 	int gaps = 0;
-	for (unsigned int i = 0; i != state.size() - 1; ++i)
-		if (abs(state[i] - state[i+1]) > 1)
+	for (unsigned int i = 0; i != state.size() -1; ++i){
+		if (abs(state[i] - state[i+1]) > 1){
 			++gaps;
+		}
+	}
     
-    if (state[state.size()] != state.size() - 1)
+    if (state[state.size()-1] != state.size() -1){
         ++gaps;
-    
+    }
+
 	return gaps;
+}
+
+void Node::setG(int cost){
+	g = cost;
 }
 
 string Node::toString() {
@@ -92,4 +132,12 @@ string Node::toString() {
     ss << "goal = " << isGoal() << endl;
     
     return ss.str();
+}
+
+int find(const vector<Node>& pancakes, Node n ){
+    for( int i = 0; i < pancakes.size(); i++ ) {
+       if( pancakes[i] == n ) {
+           return i;
+       }
+    }
 }

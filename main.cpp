@@ -13,6 +13,7 @@
 #include <cstdlib>
 //#include "Node.h"
 #include "IDA.h"
+#include "Astar.h"
 
 using namespace std;
 
@@ -114,16 +115,30 @@ int main(int argc, const char * argv[])
     cout << s.solved << endl;*/
 
     vector<int> state;
-    for (int i = 0; i != 60; ++i)
+    for (int i = 0; i != 3; ++i)
         state.push_back(i);
     srand ( unsigned ( time (NULL) ) );
     random_shuffle(state.begin(), state.end(), p_myrandom);
 
     Node node(state, 0);
-    Node copy(state, 1);
-    
-    cout << node.toString() << endl;
-    
+//    vector<int> copyvec;
+//    for (int i = 0; i != 5; ++i)
+//            copyvec.push_back(i);
+//    Node copy(copyvec, 2);
+//    
+   cout << node.toString() << endl;
+//    cout << copy.toString() << endl;
+//    if (copy < node){
+//    	cout << "node is smaller" << endl;
+//    }
+//    else{
+//    	cout << "node is greater " << endl;
+//    }
+//    
+    SolutionStar s = aStar(node,1);
+    if (s.plan.empty()){
+    	cout << "Solution is empty" << endl;
+    }
     /*vector<Node> succ = node.getAllSuccesors();
     for (int i = 0; i != succ.size(); ++i)
         cout << succ[i].toString();
@@ -131,26 +146,26 @@ int main(int argc, const char * argv[])
     cout << "equal = " << (node == succ[1]);*/
     
     // Time measure:
-    clock_t tStart = clock();
-
-    Solution s = ida(node);
-
-    double tEnd = (double)(clock() - tStart)/CLOCKS_PER_SEC;    
-    ////////////////
-
+//    clock_t tStart = clock();
+//
+//    Solution s = ida(node);
+//
+//    double tEnd = (double)(clock() - tStart)/CLOCKS_PER_SEC;    
+//    ////////////////
+//
     cout << "fin = " << s.solved << endl;
     
     cout << "solucion ok = " << Node::isSolution(node, s.plan) << endl;
-    
-    reverse(s.plan.begin(), s.plan.end());
-    cout << "plan = ";
-    for (int i = 0; i != s.plan.size(); ++i)
-        cout << s.plan[i] << " ";
-    cout << endl;
-
-
-
-    cout << "Tiempo: " << tEnd << endl;
+//    
+//    reverse(s.plan.begin(), s.plan.end());
+//    cout << "plan = ";
+//    for (int i = 0; i != s.plan.size(); ++i)
+//        cout << s.plan[i] << " ";
+//    cout << endl;
+//
+//
+//
+//    cout << "Tiempo: " << tEnd << endl;
     
     return 0;
 }

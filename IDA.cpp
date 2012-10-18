@@ -13,12 +13,14 @@
     
     // Termination bound
     int bound = 1000000000;
+    
+    int w;
 
 Solution boundedDFS(Node n, int t){
     Solution solution;
     
     // Checks if the bound hasn't been reached
-    int sum = n.getG() + n.getHeuristic();
+    int sum = n.getG() + (n.getH()*w);
     if (sum > t) {
         solution.cost = sum;
         return solution;
@@ -58,10 +60,10 @@ Solution boundedDFS(Node n, int t){
     return solution;
 }
 
-Solution ida(Node n) {
+Solution ida(Node n, int weight) {
     Solution solution;
-    solution.cost = n.getHeuristic();
-    
+    solution.cost = n.getH()*weight;
+    w = weight;
     while (!solution.solved && solution.cost < bound) {
     //while(!solution.solved){
       //  stack = vector<Node>(1, n);

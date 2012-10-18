@@ -19,21 +19,22 @@ using namespace std;
     // Termination bound
     //int bound;
     
-    // IDA* algorithm
-    struct Solution {
-        vector<int> plan;
-        int cost;
-        bool solved;
-        Solution() {
-            solved = false;
-        }
-    };
+    // IDA* algorithm solution
+struct Solution {
+    vector<int> plan;
+    int cost;
+    bool solved;
+    Solution() {
+        solved = false;
+    }
+};
     
     /* Bounded DFS: using DFS searchs for the optimal path
      * from root to node n considering heuristic function
     */
     Solution boundedDFS(Node n, int t);
     
-    Solution ida(Node n);
+    // IDA* algorithm. When weight = 1.
+    Solution ida(Node n, int weight);
 
 #endif /* defined(__pancake_problem__IDA__) */

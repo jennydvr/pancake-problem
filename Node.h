@@ -27,6 +27,9 @@ private:
     // Cost from the root to this node
     int g;
     
+    // Heuristic value
+    int h;
+    
 public:
     
     
@@ -40,6 +43,18 @@ public:
     
     // Equals-operator
     bool operator==(const Node &other) const;
+    
+    // More than operator
+    bool operator>(const Node &other) const;
+    
+    // Less than operator
+    bool operator<(const Node &other) const;
+    
+    // More equal than operator
+    bool operator>=(const Node &other) const;
+    
+    // Less equal than operator
+    bool operator<=(const Node &other) const;
     
     // Checks whether this node is goal or not
     bool isGoal();
@@ -56,14 +71,20 @@ public:
     // Gets the state
     vector<int> getState();
     
+    // Gets heuristic
+    int getH();
+    
     // Gets the size of the instance
     int getNumPancakes();
     
     // Obtains heuristic value from the state
     int getHeuristic();
-    
+        
     // Converts this node into a string
     string toString();
+    
+    // Changes value to G attribute
+    void setG(int cost);
     
 };
 
