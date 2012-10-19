@@ -124,7 +124,7 @@ int main(int argc, const char * argv[])
 //    vector<int> copyvec;
 //    for (int i = 0; i != 5; ++i)
 //            copyvec.push_back(i);
-//    Node copy(copyvec, 2);
+//    Node copy(copyvec, 2,1);
 //    
    cout << node.toString() << endl;
 //    cout << copy.toString() << endl;
@@ -135,10 +135,8 @@ int main(int argc, const char * argv[])
 //    	cout << "node is greater " << endl;
 //    }
 //    
-    SolutionStar s = aStar(node,1);
-    if (s.plan.empty()){
-    	cout << "Solution is empty" << endl;
-    }
+ SolutionStar s = aStar(node,1);
+
     /*vector<Node> succ = node.getAllSuccesors();
     for (int i = 0; i != succ.size(); ++i)
         cout << succ[i].toString();
@@ -148,16 +146,18 @@ int main(int argc, const char * argv[])
     // Time measure:
 //    clock_t tStart = clock();
 //
-//    Solution s = ida(node);
+ // Solution s = ida(node,1);
 //
 //    double tEnd = (double)(clock() - tStart)/CLOCKS_PER_SEC;    
 //    ////////////////
 //
     cout << "fin = " << s.solved << endl;
-    
+    reverse(s.plan.begin(), s.plan.end());
     cout << "solucion ok = " << Node::isSolution(node, s.plan) << endl;
+    
+    cout << "cost = " << s.cost << endl;
 //    
-//    reverse(s.plan.begin(), s.plan.end());
+   
 //    cout << "plan = ";
 //    for (int i = 0; i != s.plan.size(); ++i)
 //        cout << s.plan[i] << " ";

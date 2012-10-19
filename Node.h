@@ -30,6 +30,12 @@ private:
     // Heuristic value
     int h;
     
+    // Pointer to parent node
+    Node * p;
+    
+    // K-flip
+    int k;
+    
 public:
     
     
@@ -37,7 +43,7 @@ public:
     
     // Constructor
     Node(vector<int> pancakes, int g);
-    
+      
     // Destructor
     ~Node();
     
@@ -50,10 +56,15 @@ public:
     // Less than operator
     bool operator<(const Node &other) const;
     
-    // More equal than operator
+    /* More equal than operator. Note that
+     * if it's equal it's considererd greater the Node
+     * with greater heuristic value.
+     */ 
     bool operator>=(const Node &other) const;
     
-    // Less equal than operator
+    /* Less equal than operator
+     * Same consideration for the operator >=
+     */
     bool operator<=(const Node &other) const;
     
     // Checks whether this node is goal or not
@@ -74,17 +85,32 @@ public:
     // Gets heuristic
     int getH();
     
+    // Get parent node
+    Node* getP();
+    
     // Gets the size of the instance
     int getNumPancakes();
     
     // Obtains heuristic value from the state
     int getHeuristic();
+    
+    // Gets K-flip
+    int getK();
         
     // Converts this node into a string
     string toString();
     
     // Changes value to G attribute
     void setG(int cost);
+    
+    // Set parent node
+    void setP(Node* parent);
+    
+    //Modify heuristic value 'weight' times 
+    void setWeight(int weight);
+    
+    // Set the k-flip realized to get into this state.
+    void setKflip(int kflip);
     
 };
 

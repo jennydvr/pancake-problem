@@ -12,6 +12,8 @@ Node::Node(vector<int> state, int g) {
     this->state = state;
     this->g = g;
     this->h = getHeuristic();
+    this->k = 0;
+    this->p = 0;
 }
 
 Node::~Node() {
@@ -40,18 +42,27 @@ bool Node::operator>(const Node &other) const{
 	if ((h+ g) > (other.h +other.g)){
 			return true;
 	}
+	
 	return false;
 }
 
 bool Node::operator<=(const Node &other) const {
-	if ((h + g) <= (other.h +other.g)){
+	if ((h + g) < (other.h +other.g)){
 		return true;
+	}
+	else if ((h+g) == (other.h+ other.g)){
+		if  (h < other.h) 
+			return true;
 	}
 	return false;
 }
 
 bool Node::operator>=(const Node &other) const{
 	if ((h+ g) >= (other.h +other.g)){
+			return true;
+	}
+	else if ((h+g) == (other.h+ other.g)){
+		if  (h > other.h) 
 			return true;
 	}
 	return false;
@@ -83,6 +94,9 @@ int Node::getG() {
     return g;
 }
 
+int Node::getK() {
+	return k;
+}
 vector<int> Node::getState() {
     return state;
 }
@@ -91,6 +105,9 @@ int Node::getH(){
 	return h;
 }
 
+Node* Node::getP(){
+	return p;
+}
 int Node::getNumPancakes() {
     return (int) state.size();
 }
@@ -119,6 +136,18 @@ int Node::getHeuristic() {
 
 void Node::setG(int cost){
 	g = cost;
+}
+
+void Node::setP(Node* parent){
+	p = parent;
+}
+
+void Node::setWeight(int weight){
+	h = h * weight;
+}
+
+void Node::setKflip(int kflip){
+	k = kflip;
 }
 
 string Node::toString() {
