@@ -16,9 +16,7 @@ struct SolutionStar {
     vector<int> plan;
     int cost;
     bool solved;
-    SolutionStar() {
-        solved = false;
-    }
+    SolutionStar();
 };
 
 // A* algorithm. When weight = 1

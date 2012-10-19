@@ -7,11 +7,12 @@
 //
 
 #include <iostream>
+#include <algorithm>
+#include <sstream>
 #include <fstream>
 #include <functional>
 #include <ctime>
 #include <cstdlib>
-//#include "Node.h"
 #include "IDA.h"
 #include "Astar.h"
 

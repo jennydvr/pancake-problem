@@ -1,27 +1,21 @@
-all: clean pancakes generador
+CXX = g++
+CXXFLAGS = -O4
 
-pancakes: main.out
+build-exec = $(CXX) $(CXXFLAGS) -o $@ $^
 
-main.out: main.o Node.o IDA.o Astar.o
-	g++ -o pancake.out main.o Node.o IDA.o Astar.o
+.PHONY: all clean
 
-main.o: main.cpp
-	g++ -c -O6 main.cpp
+all: pancakes generador
+clean: ; rm -f ./*.o ./*.gch pancakes generador
 
-Node.o: Node.h Node.cpp
-	g++ -c -O6 Node.h Node.cpp
+%.o: %.cpp ; $(CXX) $(CXXFLAGS) -c $<
 
-IDA.o:  Node.h IDA.h IDA.cpp
-	g++ -c -O6 Node.h IDA.h IDA.cpp
-
-Astar.o: Node.h Astar.h Astar.cpp
-	g++ -c -O6 Node.h Astar.h Astar.cpp
-
-generador: generador.o
-	g++ -o Generador.out generador.o
-
+pancakes: main.o Node.o IDA.o Astar.o ; $(build-exec)
+generador: generador.o ; $(build-exec)
+	
+main.o: main.cpp Node.h IDA.h Astar.h
+Node.o: Node.cpp Node.h
+IDA.o: IDA.cpp  Node.h IDA.h
+Astar.o: Astar.cpp Node.h Astar.h
 generador.o: generador.cpp
-	g++ -c -O6 generador.cpp
 
-clean:
-	rm -f *.o; rm -f *.gch; rm -f pancake.out; rm -f Generador.out

@@ -6,9 +6,10 @@
 //  Copyright (c) 2012 Grace Gimon. All rights reserved.
 //
 
-#ifndef __pancake_problem__IDA__
-#define __pancake_problem__IDA__
+#ifndef _pancake_problem_IDA_
+#define _pancake_problem_IDA_
 
+#include <vector>
 #include "Node.h"
 
 using namespace std;
@@ -24,9 +25,7 @@ struct Solution {
     vector<int> plan;
     int cost;
     bool solved;
-    Solution() {
-        solved = false;
-    }
+    Solution();
 };
     
     /* Bounded DFS: using DFS searchs for the optimal path

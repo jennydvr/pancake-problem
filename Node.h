@@ -6,15 +6,11 @@
 //  Copyright (c) 2012 Jenny Valdez. All rights reserved.
 //
 
-#ifndef __pancake_problem__Node__
-#define __pancake_problem__Node__
+#ifndef _pancake_problem_Node_
+#define _pancake_problem_Node_
 
-#include <iostream>
 #include <vector>
-#include <stdlib.h>
 #include <string>
-#include <sstream>
-#include <algorithm>
 
 using namespace std;
 
@@ -114,4 +110,4 @@ public:
     
 };
 
-#endif /* defined(__pancake_problem__Node__) */
+#endif /* defined(_pancake_problem_Node_) */

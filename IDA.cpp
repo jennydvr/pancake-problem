@@ -7,6 +7,11 @@
 //
 
 #include "IDA.h"
+#include <iostream>
+#include <vector>
+#include "Node.h"
+
+using namespace std;
 
     // Stack where the already visited nodes reside
     vector<Node> closed;
@@ -15,6 +20,10 @@
     int bound = 1000000000;
     
     int w;
+
+    Solution::Solution() {
+        solved = false;
+    }
 
 Solution boundedDFS(Node n, int t){
     Solution solution;

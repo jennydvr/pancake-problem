@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 Grace Gimon. All rights reserved.
 //
 #include "Astar.h"
+#include <iostream>
+#include <vector>
+#include <algorithm>
 
     // Heap where the already visited nodes reside
     vector<Node> closedSet;
@@ -16,7 +19,10 @@
     // Bound
     int boundS;
    
-    
+    SolutionStar::SolutionStar() {
+        solved = false;
+    }    
+
     SolutionStar aStar(Node root, int weight){
     	SolutionStar sol;
     	boundS = 3;
@@ -42,6 +48,7 @@
     			cout << "Ya";
     			return sol;
     		}
+
     	//	closed.insert(n); //Add current node to closed set
     		int distance = n.getG() + 1;
     		it = closed.find(n);
