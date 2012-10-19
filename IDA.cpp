@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Grace Gimon. All rights reserved.
 //
 
-#include "IDA.h"
 #include <iostream>
 #include <vector>
+#include "IDA.h"
 #include "Node.h"
 
 using namespace std;

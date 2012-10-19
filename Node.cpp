@@ -6,11 +6,11 @@
 //  Copyright (c) 2012 Jenny Valdez. All rights reserved.
 //
 
-#include <vector>
-#include <string>
-#include "Node.h"
 #include <algorithm>
 #include <sstream>
+#include <string>
+#include <vector>
+#include "Node.h"
 
 Node::Node(vector<int> state, int g) {
     this->state = state;

@@ -6,13 +6,13 @@
 //  Copyright (c) 2012 Christian Chomiak. All rights reserved.
 //
 
-#include <iostream>
 #include <algorithm>
-#include <sstream>
+#include <cstdlib>
+#include <ctime>
 #include <fstream>
 #include <functional>
-#include <ctime>
-#include <cstdlib>
+#include <iostream>
+#include <sstream>
 #include "IDA.h"
 #include "Astar.h"
 

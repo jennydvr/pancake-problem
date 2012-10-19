@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -O4
+CXXFLAGS = -std=gnu++0x -O4
 
 build-exec = $(CXX) $(CXXFLAGS) -o $@ $^
 

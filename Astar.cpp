@@ -5,10 +5,12 @@
 //  Created by Grace Gimon on 16/10/12.
 //  Copyright (c) 2012 Grace Gimon. All rights reserved.
 //
-#include "Astar.h"
-#include <iostream>
-#include <vector>
+
 #include <algorithm>
+#include <iostream>
+#include <tuple>
+#include <vector>
+#include "Astar.h"
 
     // Heap where the already visited nodes reside
     vector<Node> closedSet;

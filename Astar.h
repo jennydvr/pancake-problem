@@ -9,8 +9,9 @@
 #ifndef __pancake_problem__ASTAR__
 #define __pancake_problem__ASTAR__
 
-#include "Node.h"
 #include <set>
+#include <tuple>
+#include "Node.h"
 
 struct SolutionStar {
     vector<int> plan;
