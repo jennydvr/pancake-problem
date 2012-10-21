@@ -24,6 +24,9 @@ struct SolutionStar {
 SolutionStar aStar(Node root, int weight);
 
 // Returns the path of flips realized.
-vector<int> extractSolution(Node* n);
+vector<int> extractSolution(Node* node);
+
+int findState(vector<int> state);
+
 
 #endif /* defined(__pancake_problem__ASTAR__) */
