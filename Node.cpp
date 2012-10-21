@@ -20,6 +20,12 @@ Node::Node(vector<int> state, int g) {
     this->p = 0;
 }
 
+Node::Node(){
+	this->g = 0;
+	this->h = 0;
+	this->k = 0;
+	this->p = 0;
+}
 Node::~Node() {
     g = 0;
     state.clear();
@@ -36,8 +42,13 @@ bool Node::operator==(const Node &other) const {
 }
 
 bool Node::operator<(const Node &other) const {
-	if ((h + g) < (other.h +other.g)){
-		return true;
+	
+	if ((h+g) < (other.h+ other.g)){ 
+			return true;
+	}
+	if ((h + g) == (other.h +other.g)){
+		if (h < other.h)
+			return true;
 	}
 	return false;
 }
@@ -51,24 +62,25 @@ bool Node::operator>(const Node &other) const{
 }
 
 bool Node::operator<=(const Node &other) const {
-	if ((h + g) < (other.h +other.g)){
-		return true;
+	if ((h + g) == (other.h +other.g)){
+		if (h < other.h)
+			return true;
 	}
-	else if ((h+g) == (other.h+ other.g)){
-		if  (h < other.h) 
+	if ((h+g) < (other.h+ other.g)){ 
 			return true;
 	}
 	return false;
 }
 
 bool Node::operator>=(const Node &other) const{
-	if ((h+ g) >= (other.h +other.g)){
-			return true;
-	}
-	else if ((h+g) == (other.h+ other.g)){
+	if ((h+g) == (other.h+ other.g)){
 		if  (h > other.h) 
 			return true;
 	}
+	if ((h+ g) > (other.h +other.g)){
+			return true;
+	}
+
 	return false;
 }
 

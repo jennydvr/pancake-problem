@@ -39,7 +39,9 @@ public:
     
     // Constructor
     Node(vector<int> pancakes, int g);
-      
+    
+    Node();
+    
     // Destructor
     ~Node();
     
