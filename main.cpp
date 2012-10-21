@@ -116,7 +116,7 @@ int main(int argc, const char * argv[])
     cout << s.solved << endl;*/
 
     vector<int> state;
-    for (int i = 0; i != 3; ++i)
+    for (int i = 0; i != 20; ++i)
         state.push_back(i);
     srand ( unsigned ( time (NULL) ) );
     random_shuffle(state.begin(), state.end(), p_myrandom);
@@ -136,7 +136,7 @@ int main(int argc, const char * argv[])
 //    	cout << "node is greater " << endl;
 //    }
 //    
- SolutionStar s = aStar(node,1);
+ SolutionStar s = aStar(node,2);
 
     /*vector<Node> succ = node.getAllSuccesors();
     for (int i = 0; i != succ.size(); ++i)
@@ -147,13 +147,13 @@ int main(int argc, const char * argv[])
     // Time measure:
 //    clock_t tStart = clock();
 //
- // Solution s = ida(node,1);
+ //Solution s = ida(node,1);
 //
 //    double tEnd = (double)(clock() - tStart)/CLOCKS_PER_SEC;    
 //    ////////////////
 //
     cout << "fin = " << s.solved << endl;
-    reverse(s.plan.begin(), s.plan.end());
+   
     cout << "solucion ok = " << Node::isSolution(node, s.plan) << endl;
     
     cout << "cost = " << s.cost << endl;
