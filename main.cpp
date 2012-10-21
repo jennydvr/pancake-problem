@@ -73,33 +73,47 @@ int vectores () {
 
 int main(int argc, const char * argv[])
 {
-    /*
-    vector<int> myvector;
+    bool usarAEstrella = false;
+    bool leerArchivo = false;
+
+    //Prueba por lectura de archivo
+    vector<int> state;
     vector<int>::iterator it;
-    string line;
-    int number;
-    ifstream myfile ("test.txt");
-    
-    if (!myfile.is_open()) {
-        cout << "Unable to open file";
-        return 0;
-    }
-    
-    while ( myfile.good() )
+
+    if (leerArchivo)
     {
-        getline (myfile,line);
-        cout << line << endl;
-        number = readInt(line);
-        if (number != -1)
-            myvector.push_back(number);
+        string line;
+        int number;
+        ifstream myfile ("comida.txt");
+        
+        if (!myfile.is_open()) {
+            cout << "Unable to open file";
+            return 0;
+        }
+        
+        while ( myfile.good() )
+        {
+            getline (myfile,line);
+            //cout << line << endl;
+            number = readInt(line);
+            if (number != -1)
+                state.push_back(number);
+        }
+        myfile.close();
     }
-    myfile.close();
+    else
+    {
+        for (int i = 0; i != 60; ++i)
+            state.push_back(i);
+        srand ( unsigned ( time (NULL) ) );
+        random_shuffle(state.begin(), state.end(), p_myrandom);
+    }
+
         
-        
-    reverse(myvector.begin(), myvector.end());
+    //reverse(state.begin(), state.end());
     // print out content:
     cout << "myvector contains:";
-    for (it=myvector.begin(); it!=myvector.end(); ++it)
+    for (it=state.begin(); it!=state.end(); ++it)
         cout << " " << *it;
         
     cout << endl;
@@ -115,11 +129,7 @@ int main(int argc, const char * argv[])
 
     cout << s.solved << endl;*/
 
-    vector<int> state;
-    for (int i = 0; i != 20; ++i)
-        state.push_back(i);
-    srand ( unsigned ( time (NULL) ) );
-    random_shuffle(state.begin(), state.end(), p_myrandom);
+
 
     Node node(state, 0);
 //    vector<int> copyvec;
@@ -135,28 +145,37 @@ int main(int argc, const char * argv[])
 //    else{
 //    	cout << "node is greater " << endl;
 //    }
-//    
- SolutionStar s = aStar(node,2);
-
+// 
+    // Time measure:
+/*
+    clock_t tStart = clock();  
+        SolutionStar s = aStar(node,1);
+    double tEnd = (double)(clock() - tStart)/CLOCKS_PER_SEC;   
+*/
     /*vector<Node> succ = node.getAllSuccesors();
     for (int i = 0; i != succ.size(); ++i)
         cout << succ[i].toString();
 
     cout << "equal = " << (node == succ[1]);*/
     
-    // Time measure:
-//    clock_t tStart = clock();
-//
- //Solution s = ida(node,1);
-//
-//    double tEnd = (double)(clock() - tStart)/CLOCKS_PER_SEC;    
-//    ////////////////
-//
-    cout << "fin = " << s.solved << endl;
-   
-    cout << "solucion ok = " << Node::isSolution(node, s.plan) << endl;
-    
-    cout << "cost = " << s.cost << endl;
+    clock_t tStart = clock();
+    if (usarAEstrella)
+    {
+        SolutionStar s = aStar(node,1);
+        cout << "fin = " << s.solved << endl;       
+        cout << "solucion ok = " << Node::isSolution(node, s.plan) << endl;        
+        cout << "cost = " << s.cost << endl;
+    }
+    else
+    {
+        Solution s = ida(node,1);    
+        cout << "fin = " << s.solved << endl;       
+        cout << "solucion ok = " << Node::isSolution(node, s.plan) << endl;        
+        cout << "cost = " << s.cost << endl;
+    }
+    double tEnd = (double)(clock() - tStart)/CLOCKS_PER_SEC;
+
+
 //    
    
 //    cout << "plan = ";
@@ -166,7 +185,7 @@ int main(int argc, const char * argv[])
 //
 //
 //
-//    cout << "Tiempo: " << tEnd << endl;
+    cout << "Tiempo: " << tEnd << endl;
     
     return 0;
 }
