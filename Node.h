@@ -17,6 +17,12 @@
 
 using namespace std;
 
+// Extra weight
+extern int weight;
+
+// Bound for the algorithms
+extern int bound;
+
 // Solution structure
 struct Solution {
     vector<int> plan;
@@ -34,54 +40,43 @@ private:
     // Pancakes configuration
     vector<int> state;
     
+    // Flips that generate it (according to certain root node)
+    vector<int> flips;
+    
     // Cost from the root to this node
-    int g;
+    int g = 0;
     
     // Heuristic value
-    int h;
+    int h = 0;
     
-    // Pointer to parent node
-    Node * p;
-    
-    // K-flip
-    int k;
+    // Obtains heuristic value from the state
+    int getHeuristic();
     
 public:
     
-    // Flips that generate it (according to cerain root node)
-    vector<int> flips;
+// STATICS
     
+    // Checks if the node is a goal applying certain steps
     static bool isSolution(Node root, vector<int> solution);
     
-    // Constructor
-    Node(vector<int> pancakes, int g);
+// CONSTRUCTORS
+    
+    // Recieves the cost of this node
+    Node(vector<int> state);
 
-    Node(vector<int> pancakes, int g, vector<int> lastState, int parentFlip);
+    // Recieves the state of the last node and the flip that generated it
+    Node(vector<int> state, int g, vector<int> lastState, int parentFlip);
     
-    Node();
+// DESTRUCTORS
     
-    // Destructor
+    // Destroys everything
     ~Node();
     
+// COMPARATORS
     // Equals-operator
     bool operator==(const Node &other) const;
     
-    // More than operator
-    bool operator>(const Node &other) const;
-    
-    // Less than operator
-    bool operator<(const Node &other) const;
-    
-    /* More equal than operator. Note that
-     * if it's equal it's considererd greater the Node
-     * with greater heuristic value.
-     */ 
-    bool operator>=(const Node &other) const;
-    
-    /* Less equal than operator
-     * Same consideration for the operator >=
-     */
-    bool operator<=(const Node &other) const;
+// USEFUL STUFF
     
     // Checks whether this node is goal or not
     bool isGoal();
@@ -92,11 +87,17 @@ public:
     // Gets all the succesors
     vector<Node> getAllSuccesors();
     
-    // Gets the node cost
-    int getG();
+    
+// GETTERS
     
     // Gets the state
     vector<int> getState();
+    
+    // Gets the flips
+    vector<int> getFlips();
+    
+    // Gets the node cost
+    int getG();
     
     // Gets heuristic
     int getH();
@@ -107,26 +108,11 @@ public:
     // Gets the size of the instance
     int getNumPancakes();
     
-    // Obtains heuristic value from the state
-    int getHeuristic();
     
-    // Gets K-flip
-    int getK();
-        
+// TO STRING
+    
     // Converts this node into a string
     string toString();
-    
-    // Changes value to G attribute
-    void setG(int cost);
-    
-    // Set parent node
-    void setP(Node* parent);
-    
-    //Modify heuristic value 'weight' times 
-    void setWeight(int weight);
-    
-    // Set the k-flip realized to get into this state.
-    void setKflip(int kflip);
     
 };
 
