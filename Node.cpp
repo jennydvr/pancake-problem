@@ -16,12 +16,14 @@ int bound = 10000;
 
 Node::Node(vector<int> state) {
     this->state = state;
+    g = h = parentFlip = 0;
 }
 
 Node::Node(vector<int> state, int g, vector<int> lastState, int parentFlip) {
     this->state = state;
     this->g = g;
     this->parentFlip = parentFlip;
+    h = 0;
     
     lastState.push_back(parentFlip);
     this->flips = lastState;
