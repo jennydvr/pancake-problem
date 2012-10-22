@@ -106,17 +106,6 @@ int vectores () {
 
 int main (int argc, char* argv[]) {
 
-    string fileWithTests;
-
-    if (argc == 1)
-    {
-        cout << "Indique nombre del archivo de pruebas." << endl;
-        return 0;
-    }
-
-    fileWithTests = argv[1];
-    cout << "El archivo es: " << fileWithTests << endl;
-
   int numberOfPancakes = 0;
   int numberOfSteps = 0;
   int numberOfTests = 0;

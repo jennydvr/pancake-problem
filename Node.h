@@ -44,10 +44,10 @@ private:
     vector<int> flips;
     
     // Cost from the root to this node
-    int g = 0;
+    int g;
     
     // Heuristic value
-    int h = 0;
+    int h;
     
     // Obtains heuristic value from the state
     int getHeuristic();

@@ -14,14 +14,16 @@ int weight = 1;
 
 int bound = 10000;
 
+
 Node::Node(vector<int> state) {
     this->state = state;
+    g = h = 0;
 }
 
 Node::Node(vector<int> state, int g, vector<int> lastState, int parentFlip) {
     this->state = state;
     this->g = g;
-    
+    h =0;
     lastState.push_back(parentFlip);
     this->flips = lastState;
 }

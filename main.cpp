@@ -27,7 +27,9 @@ bool from_string(T& t,
 int readInt (string s)
 {
     int i;
-    
+    if (s.length() == 0)
+        return -1;    
+
     // the third parameter of from_string() should be
     // one of std::hex, std::dec or std::oct
     if(from_string<int>(i, s, std::dec))
@@ -35,7 +37,7 @@ int readInt (string s)
         //std::cout << i << std::endl;
         return i;
     }
-    else if (s.compare("#"))
+    else if (s[0] == '#')
     {
         return -2;
     }
@@ -72,26 +74,28 @@ void Test(vector<int> state)
         cout << "Prueba vacia" << endl << "====================" << endl;    
     }
 
-    Node n(state, 0);
+    Node n(state);
     cout << n.toString() << endl;
     
     // Time measure:
     
     clock_t tStart = clock();
     Solution s = aStar(n);
-    double tEnd = (double)(clock() - tStart)/CLOCKS_PER_SEC;
+    double tEnd = (double)(clock() - tStart)/(double)CLOCKS_PER_SEC;
     
     cout << "AStar\n";
     cout << "    pasos = " << s.plan.size() << endl;
-    cout << "    tiempo = " << tEnd << endl << endl;
+    printf("tiempo: %.20lf \n\n", tEnd);    
+    //cout << "    tiempo = " << tEnd << endl << endl;
     
     tStart = clock();
     s = ida(n);
-    tEnd = (double)(clock() - tStart)/CLOCKS_PER_SEC;
+    tEnd = (clock() - tStart)/(double)CLOCKS_PER_SEC;
     
     cout << "IDA\n";
     cout << "    pasos = " << s.plan.size() << endl;
-    cout << "    tiempo = " << tEnd << endl << endl;
+    printf("tiempo: %.20lf \n\n", tEnd);
+    //cout << "    tiempo = " << tEnd << endl << endl;
 }
 
 int main(int argc, const char * argv[])
@@ -118,19 +122,23 @@ int main(int argc, const char * argv[])
         return 0;
     }
     
-    
+
     while ( myfile.good() )
     {
         getline (myfile,line);
         //cout << line << endl;
         number = readInt(line);
-        if (number != -1)
-            dummy.push_back(number);
-        else if (number == -2)
+        if (number == -2)
         {
             //Termine de leer un caso de prueba (lei un '#') y lo pruebo
-            Test(dummy);
-            dummy.clear();
+            cout << "=====================" << endl;         
+            Test(state);
+            cout << "=====================" << endl; 
+            state.clear();
+        }
+        else if (number != -1)
+        {
+            state.push_back(number);
         }
     }
     myfile.close();
