@@ -11,14 +11,13 @@ Instrucciones:
 * Usar make para compilar
 
 Para generar un archivo con casos de prueba:
-	$ ./generador
-Indicar numero de panquecas de cada prueba y numero de pruebas en el archivo.
+*	$ ./generador
 
 Para correr el programa:
-	$ ./pancakes <archivo>
+*	$ ./pancakes <archivo>
 
 Para ser feliz:
-	Sonreir :D
+*	Sonreir :D
 
 
 http://www.avacs.org/fileadmin/Publikationen/Open/helmert.ecai2010.pdf
