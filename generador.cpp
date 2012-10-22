@@ -42,16 +42,12 @@ void flipIt(vector<int> original, unsigned int steps, char* fileName)
         lastFlip = flips;
 
         reverse(original.begin(), original.begin() + flips);
-
-        /*cout << endl << "Iteracion #" << (i + 1) << ": ";
-        for (it=original.begin(); it!=original.end(); ++it)
-        cout << " " << *it;
-        cout << endl;*/
     }
 
-    myfile.open(fileName);
+    myfile.open(fileName, ios::out | ios::app);
     for (int i = 0; i < n; i++)
         myfile << original[i] << "\n";
+    myfile << "###" << "\n";
     myfile.close();
 
     return;
@@ -110,7 +106,7 @@ int main () {
 
   int numberOfPancakes = 0;
   int numberOfSteps = 0;
-  int numberOfFiles = 0;
+  int numberOfTests = 0;
 
   while (numberOfPancakes < 1)
   {
@@ -118,16 +114,17 @@ int main () {
   	cin >> numberOfPancakes; 
   }
 
-  while (numberOfSteps < 1)
+  /*while (numberOfSteps < 1)
   {
   	cout << "Enter number of steps: "; 
   	cin >> numberOfSteps; 
-  }
+  }*/
+  numberOfSteps = (numberOfPancakes - 2) + (1 / numberOfPancakes);
 
-  while (numberOfFiles < 1)
+  while (numberOfTests < 1)
   {
-  	cout << "Enter number of files: "; 
-  	cin >> numberOfFiles; 
+  	cout << "Enter number of tests: "; 
+  	cin >> numberOfTests; 
   }
 
   srand ( unsigned ( time (NULL) ) );
@@ -139,68 +136,13 @@ int main () {
 	myvector.push_back(i);
 
 
-  for (int i = 0; i < numberOfFiles; i++)
+  for (int i = 0; i < numberOfTests; i++)
   {
     stringstream ss;
-    ss << "prueba" << i + 1<< ".txt";
+    ss << "Prueba_" << numberOfPancakes << "p_" << numberOfTests << "i_" << ".txt";
     string sss = ss.str();
     flipIt(myvector, numberOfSteps, (char*)sss.c_str());
   }
-
-        /*cout << endl << "vector: ";
-        for (it=myvector.begin(); it!=myvector.end(); ++it)
-        cout << " " << *it;
-        cout << endl;*/
-
-  /*random_shuffle(myvector.begin(), myvector.end(), p_myrandom); 
-
-  ofstream myfile;
-  myfile.open ("test.txt");
-  for (int i = 0; i < numberOfPancakes; i++)
-	myfile << myvector[i] << "\n";
-
-  myfile.close();*/
-
-
-        /*  string line;
-          int number;
-          ifstream myfile ("test.txt");
-          if (myfile.is_open())
-          {
-            while ( myfile.good() )
-            {
-              getline (myfile,line);
-              cout << line << endl;
-              number = readInt(line);
-              if (number != -1)
-              	myvector.push_back(number);
-            }
-            myfile.close();
-
-
-            reverse(myvector.begin(),myvector.begin() + (int)myvector.size());
-            random_shuffle(myvector.begin(), myvector.end(), p_myrandom); 
-
-            // print out content:
-            cout << "myvector contains:";
-            for (it=myvector.begin(); it!=myvector.end(); ++it)
-            cout << " " << *it;
-
-            cout << endl;l
-            //vectores();
-          }
-          else cout << "Unable to open file"; 
-        */
-
-    //reverse(myvector.begin(),myvector.begin() + (int)myvector.size());
-    //random_shuffle(myvector.begin(), myvector.end(), p_myrandom); 
-
-    // print out content:
-    /*cout << "myvector contains:";
-    for (it=myvector.begin(); it!=myvector.end(); ++it)
-    cout << " " << *it;
-
-    cout << endl;*/
 
   return 0;
 }
