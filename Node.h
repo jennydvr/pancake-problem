@@ -9,11 +9,24 @@
 #ifndef _pancake_problem_Node_
 #define _pancake_problem_Node_
 
-#include <vector>
+#include <algorithm>
+#include <sstream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
+// Solution structure
+struct Solution {
+    vector<int> plan;
+    int cost;
+    bool solved;
+    
+    // Constructor
+    Solution():solved(false) {}
+};
+
+// Class that defines a pancake configuration
 class Node {
 private:
     
@@ -33,7 +46,6 @@ private:
     int k;
     
 public:
-    
     
     static bool isSolution(Node root, vector<int> solution);
     

@@ -9,31 +9,12 @@
 #ifndef _pancake_problem_IDA_
 #define _pancake_problem_IDA_
 
-#include <vector>
+#include <iostream>
 #include "Node.h"
 
 using namespace std;
     
-    // Stack where the already visited nodes reside
-    //vector<Node> closed;
-    
-    // Termination bound
-    //int bound;
-    
-    // IDA* algorithm solution
-struct Solution {
-    vector<int> plan;
-    int cost;
-    bool solved;
-    Solution();
-};
-    
-    /* Bounded DFS: using DFS searchs for the optimal path
-     * from root to node n considering heuristic function
-    */
-    Solution boundedDFS(Node n, int t);
-    
-    // IDA* algorithm. When weight = 1.
-    Solution ida(Node n, int weight);
+// IDA* algorithm, with default weight = 1
+Solution ida(Node n, int weight = 1);
 
 #endif /* defined(__pancake_problem__IDA__) */

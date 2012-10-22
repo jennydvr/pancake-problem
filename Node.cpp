@@ -6,10 +6,6 @@
 //  Copyright (c) 2012 Jenny Valdez. All rights reserved.
 //
 
-#include <algorithm>
-#include <sstream>
-#include <string>
-#include <vector>
 #include "Node.h"
 
 Node::Node(vector<int> state, int g) {
@@ -46,6 +42,7 @@ bool Node::operator<(const Node &other) const {
 	if ((h+g) < (other.h+ other.g)){ 
 			return true;
 	}
+    
 	if ((h + g) == (other.h +other.g)){
 		if (h < other.h)
 			return true;
@@ -173,7 +170,7 @@ string Node::toString() {
     for (unsigned int i = 0; i != state.size(); ++i)
         ss << " " << state[i];
     ss << " ]\ng = " << g;
-    ss << "    h = " << getHeuristic() << "\n";
+    ss << "    h = " << h << "\n";
     ss << "goal = " << isGoal() << endl;
     
     return ss.str();
