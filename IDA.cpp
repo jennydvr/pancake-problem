@@ -12,7 +12,7 @@ using namespace std;
 
 // Recursive procedure that calculates a solution
 // until certain depth is reached
-Solution boundedDFS(Node n, int t, int lastFlip) {
+Solution boundedDFS(Node n, int t) {
     Solution solution;
     
     // Check if there is a solution
@@ -32,15 +32,11 @@ Solution boundedDFS(Node n, int t, int lastFlip) {
     
     int newT = bound;
     
-    vector<Node> succesors = n.getAllSuccesors();
-    
-    for (int i = 0; i != succesors.size(); ++i) {
+    for (int i = 2; i != n.getNumPancakes() + 1; ++i) {
+        if (i == n.getParentFlip())
+            continue;
         
-        // Skip the step that generated this configuration
-     //   if (i == lastFlip)
-     //       continue;
-        
-        Solution aux = boundedDFS(succesors[i], t, i);
+        Solution aux = boundedDFS(n.getSuccesor(i), t);
         
         // If there is a solution, push the flip to the plan and return
         if (aux.solved)
@@ -49,7 +45,7 @@ Solution boundedDFS(Node n, int t, int lastFlip) {
         // Else, update the bound
         newT = min(newT, aux.cost);
     }
-
+    
     // There is no succesor that reachs the goal
     solution.cost = newT;
     return solution;
@@ -57,13 +53,13 @@ Solution boundedDFS(Node n, int t, int lastFlip) {
 
 // IDA* algorithm
 Solution ida(Node n, int w) {
-    weight = weight;
+    weight = w;
     
     Solution solution;
     solution.cost = n.getH() * weight;
     
     while (!solution.solved && solution.cost < bound)
-        solution = boundedDFS(n, solution.cost, 0);
+        solution = boundedDFS(n, solution.cost);
     
     return solution;
 }

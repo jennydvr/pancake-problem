@@ -14,16 +14,15 @@ int weight = 1;
 
 int bound = 10000;
 
-
 Node::Node(vector<int> state) {
     this->state = state;
-    g = h = 0;
 }
 
 Node::Node(vector<int> state, int g, vector<int> lastState, int parentFlip) {
     this->state = state;
     this->g = g;
-    h =0;
+    this->parentFlip = parentFlip;
+    
     lastState.push_back(parentFlip);
     this->flips = lastState;
 }
@@ -60,10 +59,19 @@ Node Node::getSuccesor(int flipped) {
 
 vector<Node> Node::getAllSuccesors() {
     vector<Node> solution;
-    for (unsigned int i = 2; i != state.size() + 1; ++i)
+    for (unsigned int i = 2; i != state.size() + 1; ++i) {
+        if (i == parentFlip)
+            continue;
+        
         solution.push_back(getSuccesor(i));
+    }
     
+    stable_sort(solution.begin(), solution.end(), compareNodes);
     return solution;
+}
+
+bool Node::compareNodes(Node x, Node y) {
+    return x.getH() < y.getH();
 }
 
 vector<int> Node::getState() {
@@ -82,6 +90,10 @@ int Node::getH() {
     if (h == 0)
         h = getHeuristic();
 	return h;
+}
+
+int Node::getParentFlip() {
+    return parentFlip;
 }
 
 int Node::getNumPancakes() {

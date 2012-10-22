@@ -44,10 +44,13 @@ private:
     vector<int> flips;
     
     // Cost from the root to this node
-    int g;
+    int g = 0;
     
     // Heuristic value
-    int h;
+    int h = 0;
+    
+    // Flip that generated this node
+    int parentFlip = 0;
     
     // Obtains heuristic value from the state
     int getHeuristic();
@@ -58,6 +61,9 @@ public:
     
     // Checks if the node is a goal applying certain steps
     static bool isSolution(Node root, vector<int> solution);
+    
+    // Compares two nodes according to their heuristic value
+    static bool compareNodes(Node x, Node y);
     
 // CONSTRUCTORS
     
@@ -102,12 +108,10 @@ public:
     // Gets heuristic
     int getH();
     
-    // Get parent node
-    Node* getP();
+    int getParentFlip();
     
     // Gets the size of the instance
     int getNumPancakes();
-    
     
 // TO STRING
     
