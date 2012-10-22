@@ -6,6 +6,21 @@ Solucion al problema de las panquecas, usando A\*, IDA\*, WA\* e WIDA\*.
 Diseñado para Inteligencia Artificial I, Universidad Simón Bolívar.
 
 
+Instrucciones:
+
+* Usar make para compilar
+
+Para generar un archivo con casos de prueba:
+	$ ./generador
+Indicar numero de panquecas de cada prueba y numero de pruebas en el archivo.
+
+Para correr el programa:
+	$ ./pancakes <archivo>
+
+Para ser feliz:
+	Sonreir :D
+
+
 http://www.avacs.org/fileadmin/Publikationen/Open/helmert.ecai2010.pdf
 
 http://www.aaai.org/ocs/index.php/SOCS/SOCS11/paper/viewFile/4022/4397
