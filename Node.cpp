@@ -10,12 +10,12 @@
 
 using namespace std;
 
-Node::Node(vector<int> state, int g) {
+int weight = 1;
+
+int bound = 10000;
+
+Node::Node(vector<int> state) {
     this->state = state;
-    this->g = g;
-    this->h = 0;
-    this->k = 0;
-    this->p = 0;
 }
 
 Node::Node(vector<int> state, int g, vector<int> lastState, int parentFlip) {
@@ -26,18 +26,13 @@ Node::Node(vector<int> state, int g, vector<int> lastState, int parentFlip) {
     this->flips = lastState;
 }
 
-Node::Node(){
-	this->g = 0;
-	this->h = 0;
-	this->k = 0;
-	this->p = 0;
-}
 Node::~Node() {
-    g = 0;
+    g = h = 0;
     state.clear();
-
+    flips.clear();
+    
     vector<int>().swap(state);
-    h = 0;
+    vector<int>().swap(flips);
 }
 
 bool Node::operator==(const Node &other) const {
@@ -47,53 +42,9 @@ bool Node::operator==(const Node &other) const {
     return true;
 }
 
-bool Node::operator<(const Node &other) const {
-	
-	if ((h+g) < (other.h+ other.g)){ 
-			return true;
-	}
-    
-	if ((h + g) == (other.h +other.g)){
-		if (h < other.h)
-			return true;
-	}
-	return false;
-}
-
-bool Node::operator>(const Node &other) const{
-	if ((h+ g) > (other.h +other.g)){
-			return true;
-	}
-	
-	return false;
-}
-
-bool Node::operator<=(const Node &other) const {
-	if ((h + g) == (other.h +other.g)){
-		if (h < other.h)
-			return true;
-	}
-	if ((h+g) < (other.h+ other.g)){ 
-			return true;
-	}
-	return false;
-}
-
-bool Node::operator>=(const Node &other) const{
-	if ((h+g) == (other.h+ other.g)){
-		if  (h > other.h) 
-			return true;
-	}
-	if ((h+ g) > (other.h +other.g)){
-			return true;
-	}
-
-	return false;
-}
-
 bool Node::isGoal() {
     for (unsigned int i = 0; i != state.size(); ++i)
-        if (state[i] != (int)i )
+        if (state[i] != (int)i)
             return false;
     return true;
 }
@@ -113,15 +64,16 @@ vector<Node> Node::getAllSuccesors() {
     return solution;
 }
 
-int Node::getG() {
-    return g;
-}
-
-int Node::getK() {
-	return k;
-}
 vector<int> Node::getState() {
     return state;
+}
+
+vector<int> Node::getFlips() {
+    return flips;
+}
+
+int Node::getG() {
+    return g;
 }
 
 int Node::getH() {
@@ -130,9 +82,6 @@ int Node::getH() {
 	return h;
 }
 
-Node* Node::getP(){
-	return p;
-}
 int Node::getNumPancakes() {
     return (int) state.size();
 }
@@ -159,22 +108,6 @@ int Node::getHeuristic() {
 	return gaps;
 }
 
-void Node::setG(int cost){
-	g = cost;
-}
-
-void Node::setP(Node* parent){
-	p = parent;
-}
-
-void Node::setWeight(int weight){
-	h = h * weight;
-}
-
-void Node::setKflip(int kflip){
-	k = kflip;
-}
-
 string Node::toString() {
     stringstream ss;
     
@@ -182,16 +115,8 @@ string Node::toString() {
     for (unsigned int i = 0; i != state.size(); ++i)
         ss << " " << state[i];
     ss << " ]\ng = " << g;
-    ss << "    h = " << h << "\n";
+    ss << "    h = " << getH() << "\n";
     ss << "goal = " << isGoal() << endl;
     
     return ss.str();
-}
-
-int find(const vector<Node>& pancakes, Node n ){
-    for( int i = 0; i < pancakes.size(); i++ ) {
-       if( pancakes[i] == n ) {
-           return i;
-       }
-    }
 }

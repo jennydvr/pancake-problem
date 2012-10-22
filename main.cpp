@@ -8,8 +8,8 @@
 
 #include <iostream>
 #include <fstream>
-#include "IDA.h"
 #include "Astar.h"
+#include "IDA.h"
 
 using namespace std;
 
@@ -62,11 +62,11 @@ int vectores () {
 int main(int argc, const char * argv[])
 {
     vector<int> state;
-    for (int i = 0; i != 50; ++i)
+    for (int i = 0; i != 10; ++i)
         state.push_back(i);
     random_shuffle(state.begin(), state.end());
     
-    Node n(state, 0);
+    Node n(state);
     cout << n.toString() << endl;
     
     // Time measure:

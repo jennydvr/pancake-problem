@@ -16,16 +16,9 @@ vector<Node> open;
 // Set of closed nodes
 vector<Node> closed;
 
-// Termination bound
-int bounds = 100000;
-
-// Weight
-int wstar;
-
-// Compares the nodes according to their cost and heuristic value
-bool priorityComparator(Node x, Node y) {
-    int xval = x.getG() + wstar * x.getH();
-    int yval = y.getG() + wstar * y.getH();
+bool starcostComparator(Node x, Node y) {
+    int xval = x.getG() + weight * x.getH();
+    int yval = y.getG() + weight * y.getH();
     
     if (xval == yval)
         return x.getH() > y.getH();
@@ -34,20 +27,21 @@ bool priorityComparator(Node x, Node y) {
 }
 
 // A* algorithm
-Solution aStar(Node n, int weight) {
+Solution aStar(Node n, int w) {
+    weight = w;
+    
     Solution solution;
-    wstar = weight;
     open.push_back(n);
     
     while (!open.empty()) {
         // Get the first element of the queue
         Node f = open.front();
-        pop_heap(open.begin(), open.end(), priorityComparator);
+        pop_heap(open.begin(), open.end(), starcostComparator);
         open.pop_back();
         
         // Check if there is a solution
         if (f.isGoal()) {
-            solution.plan = f.flips;
+            solution.plan = f.getFlips();
             solution.cost = f.getG();
             solution.solved = true;
             return solution;
@@ -73,9 +67,9 @@ Solution aStar(Node n, int weight) {
             Node succ = f.getSuccesor(i);
             
             // If the cost of this succesor is between the bound, add it
-            if (succ.getG() + wstar * succ.getH() < bounds) {
+            if (succ.getG() + weight * succ.getH() < bound) {
                 open.push_back(succ);
-                push_heap(open.begin(), open.end(), priorityComparator);
+                push_heap(open.begin(), open.end(), starcostComparator);
             }
         }
     }
