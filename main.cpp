@@ -67,6 +67,11 @@ int vectores () {
 
 void Test(vector<int> state)
 {
+    if (state.size() == 0)
+    {
+        cout << "Prueba vacia" << endl << "====================" << endl;    
+    }
+
     Node n(state, 0);
     cout << n.toString() << endl;
     
