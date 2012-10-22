@@ -73,7 +73,7 @@ int vectores () {
 
 int main(int argc, const char * argv[])
 {
-    bool usarAEstrella = false;
+    bool usarAEstrella = true;
     bool leerArchivo = false;
 
     //Prueba por lectura de archivo
@@ -103,7 +103,7 @@ int main(int argc, const char * argv[])
     }
     else
     {
-        for (int i = 0; i != 60; ++i)
+        for (int i = 0; i != 70; ++i)
             state.push_back(i);
         srand ( unsigned ( time (NULL) ) );
         random_shuffle(state.begin(), state.end(), p_myrandom);
