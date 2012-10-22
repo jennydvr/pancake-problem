@@ -9,6 +9,7 @@
 #ifndef _pancake_problem_Node_
 #define _pancake_problem_Node_
 
+#include <iostream>
 #include <algorithm>
 #include <sstream>
 #include <string>
@@ -47,10 +48,15 @@ private:
     
 public:
     
+    // Flips that generate it (according to cerain root node)
+    vector<int> flips;
+    
     static bool isSolution(Node root, vector<int> solution);
     
     // Constructor
     Node(vector<int> pancakes, int g);
+
+    Node(vector<int> pancakes, int g, vector<int> lastState, int parentFlip);
     
     Node();
     

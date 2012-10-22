@@ -33,6 +33,7 @@ Solution boundedDFS(Node n, int t, int lastFlip) {
     
     // Check if there is a solution
     if (n.isGoal()) {
+        solution.plan = n.flips;
         solution.cost = n.getG();
         solution.solved = true;
         return solution;
@@ -49,10 +50,8 @@ Solution boundedDFS(Node n, int t, int lastFlip) {
         Solution aux = boundedDFS(n.getSuccesor(i), t, i);
         
         // If there is a solution, push the flip to the plan and return
-        if (aux.solved) {
-            aux.plan.push_back(i);
+        if (aux.solved)
             return aux;
-        }
         
         // Else, update the bound
         newT = min(newT, aux.cost);

@@ -8,12 +8,22 @@
 
 #include "Node.h"
 
+using namespace std;
+
 Node::Node(vector<int> state, int g) {
     this->state = state;
     this->g = g;
-    this->h = getHeuristic();
+    this->h = 0;
     this->k = 0;
     this->p = 0;
+}
+
+Node::Node(vector<int> state, int g, vector<int> lastState, int parentFlip) {
+    this->state = state;
+    this->g = g;
+    
+    lastState.push_back(parentFlip);
+    this->flips = lastState;
 }
 
 Node::Node(){
@@ -92,7 +102,7 @@ Node Node::getSuccesor(int flipped) {
     vector<int> copy(state);
     reverse(copy.begin(), copy.begin() + flipped);
     
-    return Node(copy, g + 1);
+    return Node(copy, g + 1, flips, flipped);
 }
 
 vector<Node> Node::getAllSuccesors() {
@@ -114,7 +124,9 @@ vector<int> Node::getState() {
     return state;
 }
 
-int Node::getH(){
+int Node::getH() {
+    if (h == 0)
+        h = getHeuristic();
 	return h;
 }
 
@@ -126,9 +138,9 @@ int Node::getNumPancakes() {
 }
 
 bool Node::isSolution(Node root, vector<int> solution) {
-    for (int i = (int)solution.size() - 1; i != -1; --i)
+    for (int i = 0; i != (int)solution.size(); ++i)
         root = root.getSuccesor(solution[i]);
-        
+    
     return root.isGoal();
 }
 

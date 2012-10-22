@@ -9,10 +9,7 @@
 #ifndef _pancake_problem_IDA_
 #define _pancake_problem_IDA_
 
-#include <iostream>
 #include "Node.h"
-
-using namespace std;
     
 // IDA* algorithm, with default weight = 1
 Solution ida(Node n, int weight = 1);
