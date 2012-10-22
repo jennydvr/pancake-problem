@@ -7,6 +7,8 @@
 #include <functional>
 #include <ctime>
 #include <cstdlib>
+
+#include <iomanip>
 using namespace std;
 
 
@@ -47,7 +49,7 @@ void flipIt(vector<int> original, unsigned int steps, char* fileName)
     myfile.open(fileName, ios::out | ios::app);
     for (int i = 0; i < n; i++)
         myfile << original[i] << "\n";
-    myfile << "###" << "\n";
+    myfile << "\n" << "#" << "\n" << "\n";
     myfile.close();
 
     return;
@@ -102,7 +104,18 @@ int vectores () {
   return 0;
 }
 
-int main () {
+int main (int argc, char* argv[]) {
+
+    string fileWithTests;
+
+    if (argc == 1)
+    {
+        cout << "Indique nombre del archivo de pruebas." << endl;
+        return 0;
+    }
+
+    fileWithTests = argv[1];
+    cout << "El archivo es: " << fileWithTests << endl;
 
   int numberOfPancakes = 0;
   int numberOfSteps = 0;

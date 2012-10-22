@@ -7,6 +7,8 @@
 //
 
 #include <iostream>
+#include <sstream>
+#include <string>
 #include <fstream>
 #include "IDA.h"
 #include "Astar.h"
@@ -32,6 +34,10 @@ int readInt (string s)
     {
         //std::cout << i << std::endl;
         return i;
+    }
+    else if (s.compare("#"))
+    {
+        return -2;
     }
     else
     {
@@ -59,13 +65,8 @@ int vectores () {
     return 0;
 }
 
-int main(int argc, const char * argv[])
+void Test(vector<int> state)
 {
-    vector<int> state;
-    for (int i = 0; i != 50; ++i)
-        state.push_back(i);
-    random_shuffle(state.begin(), state.end());
-    
     Node n(state, 0);
     cout << n.toString() << endl;
     
@@ -86,6 +87,57 @@ int main(int argc, const char * argv[])
     cout << "IDA\n";
     cout << "    pasos = " << s.plan.size() << endl;
     cout << "    tiempo = " << tEnd << endl << endl;
+}
+
+int main(int argc, const char * argv[])
+{  
+    vector<int> state;
+    string line;
+    int number;
+    string fileWithTests;
+
+    if (argc == 1)
+    {
+        cout << "Indique nombre del archivo de pruebas." << endl;
+        return 0;
+    }
+
+    fileWithTests = argv[1];
+    cout << "El archivo es: " << fileWithTests << endl;
+
+
+    ifstream myfile (fileWithTests);
+    
+    if (!myfile.is_open()) {
+        cout << "Unable to open file";
+        return 0;
+    }
+    
+    
+    while ( myfile.good() )
+    {
+        getline (myfile,line);
+        //cout << line << endl;
+        number = readInt(line);
+        if (number != -1)
+            dummy.push_back(number);
+        else if (number == -2)
+        {
+            //Termine de leer un caso de prueba (lei un '#') y lo pruebo
+            Test(dummy);
+            dummy.clear();
+        }
+    }
+    myfile.close();
+
+
+    /*
+    for (int i = 0; i != 50; ++i)
+        state.push_back(i);
+    random_shuffle(state.begin(), state.end());
+    */
+
+
     
     return 0;
 }

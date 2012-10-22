@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Grace Gimon. All rights reserved.
 //
 
-#include "AStar.h"
+#include "Astar.h"
 
 using namespace std;
 
