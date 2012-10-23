@@ -19,6 +19,12 @@ Para correr el programa:
 Para ser feliz:
 *	Sonreir :D
 
+Y para las corridas:
+  Modifica el main para el numero que quieras obtener
+  Corre:  make; ./pancakes Pruebaxjkjjd.txt >> output.txt
+  Pon el peso: 1, 5 o 10
+  Corre: ./promedio.sh output.txt >> archivoequis.txt
+
 
 http://www.avacs.org/fileadmin/Publikationen/Open/helmert.ecai2010.pdf
 
