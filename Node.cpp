@@ -11,7 +11,7 @@
 using namespace std;
 
 int weight = 1;
-
+int expanded = 0;
 int bound = 10000;
 
 Node::Node(vector<int> state) {
@@ -61,14 +61,14 @@ Node Node::getSuccesor(int flipped) {
 
 vector<Node> Node::getAllSuccesors() {
     vector<Node> solution;
-    for (unsigned int i = 2; i != state.size() + 1; ++i) {
+    for (int i = 2; i != getNumPancakes() + 1; ++i) {
         if (i == parentFlip)
             continue;
         
         solution.push_back(getSuccesor(i));
     }
     
-    stable_sort(solution.begin(), solution.end(), compareNodes);
+   // stable_sort(solution.begin(), solution.end(), compareNodes);
     return solution;
 }
 

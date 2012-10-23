@@ -48,25 +48,6 @@ int readInt (string s)
     }
 }
 
-int vectores () {
-    vector<int> myvector;
-    vector<int>::iterator it;
-    
-    // set some values:
-    for (int i=1; i<10; ++i) myvector.push_back(i); // 1 2 3 4 5 6 7 8 9
-    
-    reverse(myvector.begin(),myvector.end());       // 9 8 7 6 5 4 3 2 1
-    
-    // print out content:
-    cout << "myvector contains:";
-    for (it=myvector.begin(); it!=myvector.end(); ++it)
-        cout << " " << *it;
-    
-    cout << endl;
-    
-    return 0;
-}
-
 void Test(vector<int> state, int weight)
 {
     if (state.size() == 0)
@@ -75,35 +56,44 @@ void Test(vector<int> state, int weight)
     }
 
     Node n(state);
-    cout << "#Nodo Inicial#" << endl;
-    cout << n.toString() << endl;
+   // cout << "#Nodo Inicial#" << endl;
+   // cout << n.toString() << endl;
+    //cout << n.getH() << endl;
     
     // Time measure:
-    
+ /*
     clock_t tStart = clock();
-    Solution s = aStar(n,weight);
+    Solution s = aStar(n, weight);
     double tEnd = (double)(clock() - tStart)/(double)CLOCKS_PER_SEC;
     cout << "SOLUCIONES\n" << endl;
     cout << "  AStar\n";
     cout << "   Peso: " << weight << endl;
    
     cout << "    pasos = " << s.plan.size() << endl;
-    printf("     tiempo: %.20lf \n\n", tEnd);    
-    //cout << "    tiempo = " << tEnd << endl << endl;
-    
-    tStart = clock();
-    s = ida(n,weight);
-    tEnd = (clock() - tStart)/(double)CLOCKS_PER_SEC;
+    printf("    tiempo: %.20lf \n\n", tEnd);
+    */
+    clock_t tStart = clock();
+    Solution s = ida(n, weight);
+    double tEnd = (clock() - tStart)/(double)CLOCKS_PER_SEC;
  
-    cout << "  IDA\n";
-    cout << "   Peso: " << weight << endl;
-    cout << "    pasos = " << s.plan.size() << endl;
-    printf("     tiempo: %.20lf \n\n", tEnd);
-    //cout << "    tiempo = " << tEnd << endl << endl;
+   // cout << "  IDA\n";
+   // cout << "   Peso: " << weight << endl;
+    // cout << "    pasos = " << s.plan.size() << endl;
+    //printf("    tiempo: %.20lf \n\n", tEnd);
+    
+    
+    
+    // COSAS A IMPRIMIR
+    
+  //  printf("%.20lf \n", tEnd);
+    cout << expanded << endl;
+  //  cout << s.plan.size() << endl;
+  //  cout << n.getH() << endl;
 }
 
 int main(int argc, const char * argv[])
-{  
+{
+    
     vector<int> state;
     string line;
     int number;
@@ -112,10 +102,10 @@ int main(int argc, const char * argv[])
     
      while (weight < 1)
     {
-  	cout << "Enter weight for IDA and Astar: "; 
+  //	cout << "Enter weight for IDA and Astar: ";
   	cin >> weight; 
     }
-    cout << "File name is: " << fileWithTests << endl;
+  //  cout << "File name is: " << fileWithTests << endl;
 
     fileWithTests = argv[1];
     ifstream myfile (fileWithTests);
@@ -134,9 +124,9 @@ int main(int argc, const char * argv[])
         if (number == -2)
         {
             //Termine de leer un caso de prueba (lei un '#') y lo pruebo
-            cout << "=====================" << endl;         
+          //  cout << "=====================" << endl;
             Test(state,weight);
-            cout << "=====================" << endl; 
+          //  cout << "=====================" << endl;
             state.clear();
         }
         else if (number != -1)
@@ -145,15 +135,5 @@ int main(int argc, const char * argv[])
         }
     }
     myfile.close();
-
-
-    /*
-    for (int i = 0; i != 50; ++i)
-        state.push_back(i);
-    random_shuffle(state.begin(), state.end());
-    */
-
-
-    
     return 0;
 }

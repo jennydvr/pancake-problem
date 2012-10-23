@@ -13,6 +13,8 @@ using namespace std;
 // Recursive procedure that calculates a solution
 // until certain depth is reached
 Solution boundedDFS(Node n, int t) {
+    ++expanded;
+    
     Solution solution;
     
     // Check if there is a solution
@@ -58,8 +60,10 @@ Solution ida(Node n, int w) {
     Solution solution;
     solution.cost = n.getH() * weight;
     
-    while (!solution.solved && solution.cost < bound)
+    while (!solution.solved && solution.cost < bound) {
+        expanded = 0;
         solution = boundedDFS(n, solution.cost);
+    }
     
     return solution;
 }

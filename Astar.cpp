@@ -28,24 +28,19 @@ bool starcostComparator(Node x, Node y) {
 
 // A* algorithm
 Solution aStar(Node n, int w) {
+    expanded = 0;
     weight = w;
     
     Solution solution;
     open.push_back(n);
     
     while (!open.empty()) {
+        ++expanded;
+        
         // Get the first element of the queue
         Node f = open.front();
         pop_heap(open.begin(), open.end(), starcostComparator);
         open.pop_back();
-        
-        // Check if there is a solution
-        if (f.isGoal()) {
-            solution.plan = f.getFlips();
-            solution.cost = f.getG();
-            solution.solved = true;
-            return solution;
-        }
         
         // Check if the node is not in the closed list
         vector<Node>::iterator c = find(closed.begin(), closed.end(), f);
@@ -61,6 +56,14 @@ Solution aStar(Node n, int w) {
         // If the element is in the set but there is a better way, replace it
         else if (c != closed.end() && f.getG() < c->getG())
             *c = f;
+        
+        // Check if there is a solution
+        if (f.isGoal()) {
+            solution.plan = f.getFlips();
+            solution.cost = f.getG();
+            solution.solved = true;
+            return solution;
+        }
         
         // Now check the succesors
         for (int i = 2; i != f.getNumPancakes() + 1; ++i) {

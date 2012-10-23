@@ -17,6 +17,9 @@
 
 using namespace std;
 
+// Expanded nodes
+extern int expanded;
+
 // Extra weight
 extern int weight;
 
