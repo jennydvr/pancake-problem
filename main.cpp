@@ -85,10 +85,10 @@ void Test(vector<int> state, int weight)
     
     // COSAS A IMPRIMIR
     
-  //  printf("%.20lf \n", tEnd);
+    printf("%.20lf \n", tEnd);
     cout << expanded << endl;
-  //  cout << s.plan.size() << endl;
-  //  cout << n.getH() << endl;
+    cout << s.plan.size() << endl;
+    cout << n.getH() << endl;
 }
 
 int main(int argc, const char * argv[])
