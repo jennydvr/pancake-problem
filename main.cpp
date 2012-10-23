@@ -67,7 +67,7 @@ int vectores () {
     return 0;
 }
 
-void Test(vector<int> state)
+void Test(vector<int> state, int weight)
 {
     if (state.size() == 0)
     {
@@ -75,26 +75,30 @@ void Test(vector<int> state)
     }
 
     Node n(state);
+    cout << "#Nodo Inicial#" << endl;
     cout << n.toString() << endl;
     
     // Time measure:
     
     clock_t tStart = clock();
-    Solution s = aStar(n);
+    Solution s = aStar(n,weight);
     double tEnd = (double)(clock() - tStart)/(double)CLOCKS_PER_SEC;
-    
-    cout << "AStar\n";
+    cout << "SOLUCIONES\n" << endl;
+    cout << "  AStar\n";
+    cout << "   Peso: " << weight << endl;
+   
     cout << "    pasos = " << s.plan.size() << endl;
-    printf("tiempo: %.20lf \n\n", tEnd);    
+    printf("     tiempo: %.20lf \n\n", tEnd);    
     //cout << "    tiempo = " << tEnd << endl << endl;
     
     tStart = clock();
-    s = ida(n);
+    s = ida(n,weight);
     tEnd = (clock() - tStart)/(double)CLOCKS_PER_SEC;
-    
-    cout << "IDA\n";
+ 
+    cout << "  IDA\n";
+    cout << "   Peso: " << weight << endl;
     cout << "    pasos = " << s.plan.size() << endl;
-    printf("tiempo: %.20lf \n\n", tEnd);
+    printf("     tiempo: %.20lf \n\n", tEnd);
     //cout << "    tiempo = " << tEnd << endl << endl;
 }
 
@@ -103,18 +107,17 @@ int main(int argc, const char * argv[])
     vector<int> state;
     string line;
     int number;
+    int weight = 0;
     string fileWithTests;
-
-    if (argc == 1)
+    
+     while (weight < 1)
     {
-        cout << "Indique nombre del archivo de pruebas." << endl;
-        return 0;
+  	cout << "Enter weight for IDA and Astar: "; 
+  	cin >> weight; 
     }
+    cout << "File name is: " << fileWithTests << endl;
 
     fileWithTests = argv[1];
-    cout << "El archivo es: " << fileWithTests << endl;
-
-
     ifstream myfile (fileWithTests);
     
     if (!myfile.is_open()) {
@@ -132,7 +135,7 @@ int main(int argc, const char * argv[])
         {
             //Termine de leer un caso de prueba (lei un '#') y lo pruebo
             cout << "=====================" << endl;         
-            Test(state);
+            Test(state,weight);
             cout << "=====================" << endl; 
             state.clear();
         }
