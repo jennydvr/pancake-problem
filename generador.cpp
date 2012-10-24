@@ -121,7 +121,7 @@ int main (int argc, char* argv[]) {
   	cout << "Enter number of steps: "; 
   	cin >> numberOfSteps; 
   }*/
-  numberOfSteps = (numberOfPancakes - 2) + (1 / numberOfPancakes);
+  numberOfSteps = (numberOfPancakes - 2); // + (1 / numberOfPancakes);
 
   while (numberOfTests < 1)
   {
