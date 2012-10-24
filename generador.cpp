@@ -137,14 +137,18 @@ int main (int argc, char* argv[]) {
   for (int i = 0; i < numberOfPancakes; i++)
 	myvector.push_back(i);
 
-
-  for (int i = 0; i < numberOfTests; i++)
-  {
     stringstream ss;
     ss << "Prueba_" << numberOfPancakes << "p_" << numberOfTests << "i_" << ".txt";
     string sss = ss.str();
+    for (int i = 0; i < numberOfTests; i++)
+    {
     flipIt(myvector, numberOfSteps, (char*)sss.c_str());
-  }
+    }
+    
+    ofstream myfile;
+    myfile.open("nombres.txt", ios::out | ios::app);
+    myfile << sss << "\n";
+    myfile.close();
 
   return 0;
 }
