@@ -11,7 +11,7 @@
 
 #include "Node.h"
     
-// IDA* algorithm, with default weight = 1
-Solution ida(Node n, int w = 1);
+// IDA* algorithm
+Solution ida(Node n);
 
 #endif /* defined(__pancake_problem__IDA__) */

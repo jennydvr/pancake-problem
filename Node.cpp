@@ -11,7 +11,6 @@
 using namespace std;
 
 int weight = 1;
-int expanded = 0;
 int bound = 10000;
 
 Node::Node(vector<int> state) {

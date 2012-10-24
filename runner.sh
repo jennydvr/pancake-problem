@@ -14,7 +14,7 @@ do
     then
         break
     else
-        sed -i '$d' "$1"
+        sed -i.bak '$d' "$1"
         echo "Archivo: $file"
         ./executor.sh "$file"
     fi

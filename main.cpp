@@ -48,7 +48,7 @@ int readInt (string s)
     }
 }
 
-void Test(vector<int> state, int weight, bool usarAstar)
+void Test(vector<int> state, bool usarAstar)
 {
     /*if (state.size() == 0)
     {
@@ -56,6 +56,8 @@ void Test(vector<int> state, int weight, bool usarAstar)
     }*/
 
     Node n(state);
+    bound = 100000;
+    
    // cout << "#Nodo Inicial#" << endl;
    // cout << n.toString() << endl;
     //cout << n.getH() << endl;
@@ -72,7 +74,7 @@ void Test(vector<int> state, int weight, bool usarAstar)
     cout << "    pasos = " << s.plan.size() << endl;
     printf("    tiempo: %.20lf \n\n", tEnd);
     */
-
+    
     Solution s;
     clock_t tStart = clock();    
     if (usarAstar)
@@ -91,7 +93,6 @@ void Test(vector<int> state, int weight, bool usarAstar)
     // COSAS A IMPRIMIR
     
     printf("%.5lf \n", tEnd);
-    cout << expanded << endl;
     cout << (int)s.plan.size() << endl;
     cout << n.getH() << endl;
 }
@@ -102,7 +103,6 @@ int main(int argc, const char * argv[])
     vector<int> state;
     string line;
     int number;
-    int weight = 0;
     string fileWithTests;
     
     if (argc != 4)
@@ -116,14 +116,6 @@ int main(int argc, const char * argv[])
     if (algoritmo != 0 && algoritmo != 1)
         return 0;
     usarAstar = algoritmo == 0; // 0: A* - 1: IDA*
-
-    /*
-     while (weight < 1)
-    {
-  //	cout << "Enter weight for IDA and Astar: ";
-  	cin >> weight; 
-    }*/
-  //  cout << "File name is: " << fileWithTests << endl;
 
     fileWithTests = argv[1];
 
@@ -144,7 +136,7 @@ int main(int argc, const char * argv[])
         {
             //Termine de leer un caso de prueba (lei un '#') y lo pruebo
           //  cout << "=====================" << endl;
-            Test(state,weight,usarAstar);
+            Test(state, usarAstar);
           //  cout << "=====================" << endl;
             state.clear();
         }
