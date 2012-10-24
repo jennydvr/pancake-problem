@@ -27,8 +27,9 @@ do
 done < $1
 
 lines=$(($count / 4))
+filename="resultados$1"
 
-echo -e $(echo "scale=3; $sum1/$lines" | bc)
-echo -e $(echo "scale=3; $sum2/$lines" | bc)
-echo -e $(echo "scale=3; $sum3/$lines" | bc)
-echo -e $(echo "scale=3; $sum4/$lines" | bc)
+echo -e $(echo "scale=3; $sum1/$lines" | bc) >> $filename
+echo -e $(echo "scale=3; $sum2/$lines" | bc) >> $filename
+echo -e $(echo "scale=3; $sum3/$lines" | bc) >> $filename
+echo -e $(echo "scale=3; $sum4/$lines" | bc) >> $filename1.txt
