@@ -6,8 +6,16 @@
 #  Created by Jenny Valdez on 23/10/12.
 #  Copyright (c) 2012 Jenny Valdez. All rights reserved.
 
-cat "$1" | while read file
+while true
 do
-    echo "Archivo: $file"
-    ./executor.sh "$file"
+    file=$(tail -1 "$1")
+
+    if [ "$file" == "" ]
+    then
+        break
+    else
+        sed -i '$d' "$1"
+        echo "Archivo: $file"
+        ./executor.sh "$file"
+    fi
 done
