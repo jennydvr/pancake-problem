@@ -10,12 +10,6 @@
 
 using namespace std;
 
-// Priority queue
-vector<Node> open;
-
-// Set of closed nodes
-vector<Node> closed;
-
 bool starcostComparator(Node x, Node y) {
     int xval = x.getG() + weight * x.getH();
     int yval = y.getG() + weight * y.getH();
@@ -30,6 +24,9 @@ bool starcostComparator(Node x, Node y) {
 Solution aStar(Node n, int w) {
     expanded = 0;
     weight = w;
+    
+    vector<Node> open;
+    vector<Node> closed;
     
     Solution solution;
     open.push_back(n);
