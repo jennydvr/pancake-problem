@@ -26,9 +26,6 @@ done < $1
 
 lines=$(($count / 3))
 filename="resultados$1"
-echo "tiempo"
-echo -e $(echo "scale=3; $sum1/$lines" | bc) #>> $filename
-echo "pasos"
-echo -e $(echo "scale=3; $sum2/$lines" | bc) #>> $filename
-echo "h inicial"
-echo -e $(echo "scale=3; $sum3/$lines" | bc) #>> $filename
+echo -e $(echo "scale=3; $sum1/$lines" | bc) >> $filename
+echo -e $(echo "scale=3; $sum2/$lines" | bc) >> $filename
+echo -e $(echo "scale=3; $sum3/$lines" | bc) >> $filename

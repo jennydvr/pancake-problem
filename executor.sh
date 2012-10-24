@@ -30,7 +30,6 @@ temp="$temp.txt"
 ./promedio.sh $temp
 rm $temp
 
-
 echo "    w = 5..."
 
 temp=$1
@@ -49,7 +48,4 @@ temp="${temp##*_}"
 temp="$temp.txt"
 ./pancakes $1 10 1 > $temp
 ./promedio.sh $temp
-rm $temp
-
-
 rm $temp
