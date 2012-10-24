@@ -21,10 +21,7 @@ bool starcostComparator(Node x, Node y) {
 }
 
 // A* algorithm
-Solution aStar(Node n, int w) {
-    expanded = 0;
-    weight = w;
-    
+Solution aStar(Node n) {
     vector<Node> open;
     vector<Node> closed;
     
@@ -32,8 +29,6 @@ Solution aStar(Node n, int w) {
     open.push_back(n);
     
     while (!open.empty()) {
-        ++expanded;
-        
         // Get the first element of the queue
         Node f = open.front();
         pop_heap(open.begin(), open.end(), starcostComparator);

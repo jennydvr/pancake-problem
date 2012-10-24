@@ -12,7 +12,7 @@
 #include <iostream>
 #include "Node.h"
 
-// A* algorithm, with default weight = 1
-Solution aStar(Node n, int w = 1);
+// A* algorithm
+Solution aStar(Node n);
 
 #endif /* defined(__pancake_problem__AStar__) */
